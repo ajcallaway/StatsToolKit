@@ -936,6 +936,41 @@ a:hover { color: var(--accent-hover); }
   display: flex; gap: var(--space-3); align-items: flex-start;
   position: relative;
 }
+/* Jumpable variant — renders as a button. Reset button defaults, then style. */
+button.sp-dp-step-jumpable {
+  font-family: inherit;
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: var(--space-1) var(--space-2);
+  margin: calc(-1 * var(--space-1)) calc(-1 * var(--space-2));
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  width: calc(100% + var(--space-4));
+  min-height: 44px;
+  transition: background var(--dur-fast) var(--ease-standard);
+}
+button.sp-dp-step-jumpable:hover {
+  background: var(--accent-soft);
+}
+button.sp-dp-step-jumpable:hover .sp-dp-edit { opacity: 1; }
+button.sp-dp-step-jumpable:hover .sp-dp-q { color: var(--accent); }
+.sp-dp-edit {
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-snug);
+  color: var(--accent);
+  margin-left: var(--space-2);
+  opacity: 0;
+  transition: opacity var(--dur-fast);
+}
+.sp-dp-hint {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  color: var(--ink-faint);
+  text-transform: none;
+  letter-spacing: 0;
+}
 .sp-dp-line-wrap { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
 .sp-dp-circle {
   width: 18px; height: 18px;
@@ -1080,6 +1115,169 @@ a:hover { color: var(--accent-hover); }
 .sp-upload-sub {
   font-size: var(--fs-xs);
   color: var(--ink-3);
+}
+
+/* ============================================================
+   FILE FORMAT GUIDE — collapsed details/summary card under upload
+   ============================================================ */
+.sp-fileguide {
+  margin-top: var(--space-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  overflow: hidden;
+  transition: box-shadow var(--dur-base) var(--ease-standard);
+}
+.sp-fileguide[open] { box-shadow: var(--shadow-sm); }
+
+.sp-fileguide summary {
+  padding: var(--space-3) var(--space-4);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-3);
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--ink-2);
+  letter-spacing: -0.01em;
+  user-select: none;
+  min-height: 44px;
+}
+.sp-fileguide summary::-webkit-details-marker { display: none; }
+.sp-fileguide summary:hover { color: var(--ink); }
+
+.sp-fileguide-summary-text {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+}
+.sp-fileguide-summary-text svg { color: var(--accent); flex-shrink: 0; }
+
+.sp-fileguide-chevron {
+  color: var(--ink-3);
+  transition: transform var(--dur-base) var(--ease-spring);
+  flex-shrink: 0;
+}
+.sp-fileguide[open] .sp-fileguide-chevron { transform: rotate(180deg); }
+
+.sp-fileguide-body {
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-base);
+  color: var(--ink-2);
+  animation: fgSlide var(--dur-slow) var(--ease-out);
+}
+@keyframes fgSlide {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+.sp-fileguide-intro {
+  margin-bottom: var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+}
+.sp-fileguide-intro strong { color: var(--ink); font-weight: var(--fw-semibold); }
+
+/* Example table */
+.sp-fileguide-example {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+}
+.sp-fileguide-ex-title {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+.sp-fileguide-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  margin-bottom: var(--space-2);
+}
+.sp-fileguide-table th {
+  text-align: left;
+  padding: var(--space-1) var(--space-3);
+  background: var(--paper-2);
+  border-bottom: 1.5px solid var(--rule-strong);
+  color: var(--ink);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-xs);
+  letter-spacing: -0.01em;
+}
+.sp-fileguide-table td {
+  padding: var(--space-1) var(--space-3);
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-2);
+  font-feature-settings: 'tnum';
+}
+.sp-fileguide-table tbody tr:last-child td { border-bottom: none; }
+.sp-fileguide-caption {
+  font-size: var(--fs-xs);
+  color: var(--ink-3);
+  font-style: italic;
+}
+.sp-fileguide-caption code {
+  font-family: var(--font-mono);
+  font-style: normal;
+  background: var(--paper-2);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--rule);
+  font-size: 0.9em;
+}
+
+/* DO / AVOID two-column rules */
+.sp-fileguide-rules {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+@media (min-width: 640px) {
+  .sp-fileguide-rules { grid-template-columns: 1fr 1fr; }
+}
+.sp-fileguide-rule {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+}
+.sp-fileguide-rule.sp-rule-do { border-left: 3px solid var(--ok); }
+.sp-fileguide-rule.sp-rule-dont { border-left: 3px solid var(--warn); }
+.sp-rule-head {
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+.sp-rule-do .sp-rule-head { color: var(--ok); }
+.sp-rule-dont .sp-rule-head { color: var(--warn); }
+.sp-fileguide-rule ul {
+  margin: 0;
+  padding-left: var(--space-4);
+  font-size: var(--fs-xs);
+  line-height: var(--lh-base);
+  color: var(--ink-2);
+}
+.sp-fileguide-rule li { margin-bottom: var(--space-2); }
+.sp-fileguide-rule li:last-child { margin-bottom: 0; }
+.sp-fileguide-rule li strong { color: var(--ink); font-weight: var(--fw-semibold); }
+.sp-fileguide-rule li code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--paper-2);
+  padding: 1px 4px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--rule);
+  color: var(--ink-2);
 }
 
 .sp-upload-loaded {
@@ -1319,7 +1517,126 @@ a:hover { color: var(--accent-hover); }
   color: var(--ink-3);
   letter-spacing: var(--tracking-snug);
   text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 4px;
 }
+
+/* ============================================================
+   INFOTIP — small "i" badge with hover/focus tooltip bubble.
+   Used inside clarifier labels (Predictors, Covariate, etc.)
+   ============================================================ */
+.sp-infotip {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  color: var(--ink-3);
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  cursor: help;
+  transition: color var(--dur-fast), background var(--dur-fast), border-color var(--dur-fast);
+  margin-left: 2px;
+  /* override the global 44px min-height */
+  min-height: 16px;
+}
+.sp-infotip:hover, .sp-infotip:focus-visible {
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-color: rgba(0,113,227,0.25);
+  outline: none;
+}
+.sp-infotip svg { display: block; pointer-events: none; }
+
+.sp-infotip-bubble {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  width: 280px;
+  max-width: min(280px, 80vw);
+  padding: var(--space-3) var(--space-4);
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-base);
+  letter-spacing: -0.005em;
+  text-transform: none;
+  text-align: left;
+  white-space: normal;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur-fast) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-out),
+              visibility 0s linear var(--dur-fast);
+  z-index: var(--z-tooltip);
+  box-shadow: 0 4px 16px -2px rgb(15 17 20 / 0.18);
+}
+.sp-infotip-bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%; left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--ink);
+}
+.sp-infotip-bubble strong { color: #fff; font-weight: var(--fw-semibold); }
+.sp-infotip-bubble em { color: rgba(255,255,255,0.9); font-style: italic; }
+
+.sp-infotip:hover .sp-infotip-bubble,
+.sp-infotip:focus-visible .sp-infotip-bubble,
+.sp-infotip.open .sp-infotip-bubble {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  transition: opacity var(--dur-fast) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-out),
+              visibility 0s linear 0s;
+}
+
+/* Mobile: open on tap. The .open class is toggled by JS. */
+@media (hover: none) {
+  .sp-infotip-bubble {
+    /* On touch devices the bubble shows when .open is added */
+  }
+}
+
+.sp-clar.sp-clar-auto {
+  background: var(--ok-bg);
+  border-radius: var(--radius-sm);
+  padding: 4px var(--space-3);
+  border: 1px solid rgba(0,135,90,0.18);
+}
+.sp-auto-note {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--ok);
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.sp-auto-tag {
+  font-size: 10px;
+  font-weight: var(--fw-medium);
+  color: var(--ink-3);
+  text-transform: none;
+  letter-spacing: 0;
+  font-style: normal;
+}
+.sp-auto-tag em {
+  font-style: normal;
+  font-family: var(--font-mono);
+  background: var(--paper-2);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  color: var(--ink-2);
+  border: 1px solid var(--rule);
+  font-size: 10px;
+}
+
 .sp-clar select {
   padding: var(--space-1) var(--space-2);
   border: 1px solid var(--rule-strong);
@@ -1778,6 +2095,125 @@ a:hover { color: var(--accent-hover); }
   border-top: 1px solid var(--rule);
 }
 
+/* ============================================================
+   HELP TRIGGER (inline "Show me how" pill, next to question help text)
+   ============================================================ */
+.sp-help-trigger {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px var(--space-3);
+  margin-left: var(--space-1);
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  vertical-align: 1px;
+  min-height: 26px;
+  white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard),
+              transform var(--dur-instant);
+}
+.sp-help-trigger:hover {
+  background: rgba(0,113,227,0.14);
+  border-color: rgba(0,113,227,0.25);
+}
+.sp-help-trigger:active { transform: scale(0.97); }
+.sp-help-trigger svg { display: block; }
+
+/* ============================================================
+   HELP MODAL (per-question walkthroughs)
+   ============================================================ */
+.modal.modal-help {
+  width: 600px;
+  position: relative;
+  padding: var(--space-7) var(--space-6) var(--space-5);
+}
+.modal-close-btn {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--paper-2);
+  border: none;
+  color: var(--ink-3);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background var(--dur-fast), color var(--dur-fast);
+  min-height: 32px;
+}
+.modal-close-btn:hover {
+  background: var(--paper-3);
+  color: var(--ink);
+}
+
+.help-section { margin-bottom: var(--space-5); }
+.help-section:last-child { margin-bottom: 0; }
+.help-section-h {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+}
+.help-step-list {
+  display: flex; flex-direction: column;
+  gap: var(--space-2);
+  counter-reset: hstep;
+}
+.help-step {
+  display: flex; gap: var(--space-3);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-base);
+  color: var(--ink-2);
+}
+.help-step::before {
+  counter-increment: hstep;
+  content: counter(hstep);
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--paper-2);
+  color: var(--ink-2);
+  font-family: var(--font-body);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-xs);
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.help-step code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--paper-2);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  color: var(--accent);
+  border: 1px solid var(--rule);
+}
+.help-step em { font-style: italic; color: var(--ink); font-weight: var(--fw-semibold); }
+
+.help-note-list {
+  display: flex; flex-direction: column;
+  gap: var(--space-3);
+}
+.help-note {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-base);
+  color: var(--ink-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--paper-2);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent);
+}
+.help-note strong { color: var(--ink); font-weight: var(--fw-semibold); }
+
 /* Report-issue button in header */
 .btn-report {
   display: inline-flex; align-items: center; gap: var(--space-1);
@@ -1912,7 +2348,10 @@ a:hover { color: var(--accent-hover); }
           <div class="sp-section">
             <div class="sp-reset-bar">
               <span class="sp-res-counter">Recommended test</span>
-              <button class="btn btn-ghost" id="sp-reset-wizard-btn">↺ Start over</button>
+              <div style="display: flex; gap: var(--space-2);">
+                <button class="btn btn-ghost" id="sp-back-wizard-btn">← Back</button>
+                <button class="btn btn-ghost" id="sp-reset-wizard-btn">↺ Start over</button>
+              </div>
             </div>
             <div id="sp-wiz-result-card"></div>
           </div>
@@ -1943,6 +2382,54 @@ a:hover { color: var(--accent-hover); }
               <div class="sp-upload-title">Drop an Excel or CSV file, or click to browse</div>
               <div class="sp-upload-sub" id="sp-upload-desc">Your data never leaves your browser</div>
             </div>
+
+            <!-- File format guide: collapsed by default -->
+            <details class="sp-fileguide">
+              <summary>
+                <span class="sp-fileguide-summary-text">
+                  <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="6" x2="8" y2="11"/><circle cx="8" cy="4.5" r="0.6" fill="currentColor"/></svg>
+                  How should my data be set up?
+                </span>
+                <svg class="sp-fileguide-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 4.5 6 7.5 9 4.5"/></svg>
+              </summary>
+              <div class="sp-fileguide-body">
+                <p class="sp-fileguide-intro"><strong>One row per participant</strong>, with each measurement or grouping variable as its own column.</p>
+
+                <div class="sp-fileguide-example">
+                  <div class="sp-fileguide-ex-title">Example — comparing body mass between genders</div>
+                  <table class="sp-fileguide-table">
+                    <thead><tr><th>ID</th><th>Gender</th><th>Bodymass</th><th>Age</th></tr></thead>
+                    <tbody>
+                      <tr><td>1</td><td>1</td><td>71.1</td><td>27.0</td></tr>
+                      <tr><td>2</td><td>2</td><td>62.3</td><td>24.4</td></tr>
+                      <tr><td>3</td><td>1</td><td>85.6</td><td>56.9</td></tr>
+                      <tr><td>4</td><td>2</td><td>53.7</td><td>22.1</td></tr>
+                    </tbody>
+                  </table>
+                  <p class="sp-fileguide-caption">Use numeric codes (e.g. <code>1</code>/<code>2</code>) <em>or</em> text labels (<code>Male</code>/<code>Female</code>) for groups — both work.</p>
+                </div>
+
+                <div class="sp-fileguide-rules">
+                  <div class="sp-fileguide-rule sp-rule-do">
+                    <div class="sp-rule-head">DO</div>
+                    <ul>
+                      <li>Put column headers in <strong>row 1</strong>.</li>
+                      <li>Keep <strong>one row per participant</strong>, even with repeated measures.</li>
+                      <li>For paired data (pre/post), use <strong>two columns</strong> (e.g. <code>Score_pre</code>, <code>Score_post</code>).</li>
+                      <li>Leave cells <strong>blank</strong> for missing values — don\'t use 999 or "N/A".</li>
+                    </ul>
+                  </div>
+                  <div class="sp-fileguide-rule sp-rule-dont">
+                    <div class="sp-rule-head">AVOID</div>
+                    <ul>
+                      <li>Splitting groups into <strong>separate columns</strong> (e.g. <code>Bodymass_male</code> + <code>Bodymass_female</code>) — keep them in one column with a grouping column alongside.</li>
+                      <li>Multiple header rows or merged cells.</li>
+                      <li>Spaces or special characters in column headers (use <code>Body_mass</code> not <code>Body mass (kg)</code>).</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </details>
           </div>
 
           <div id="sp-var-display" style="display: none;">
@@ -2188,6 +2675,23 @@ a:hover { color: var(--accent-hover); }
   </div>
 </div>
 
+<!-- ═══════════════ HELP-EXTRA MODAL (per-question walkthroughs) ═══════════════ -->
+<div class="modal-overlay" id="modal-help" role="dialog" aria-labelledby="modal-help-title" aria-modal="true">
+  <div class="modal modal-help">
+    <button type="button" class="modal-close-btn" id="help-close-x" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <line x1="3" y1="3" x2="13" y2="13"/>
+        <line x1="13" y1="3" x2="3" y2="13"/>
+      </svg>
+    </button>
+    <div class="modal-title" id="modal-help-title">How to check normality in JASP</div>
+    <div id="help-body"></div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-primary" id="help-close">Got it</button>
+    </div>
+  </div>
+</div>
+
 <script>
 'use strict';
 
@@ -2335,21 +2839,28 @@ function spBuildResultCard(resultKey, questionTextHTML, decisionPath) {
   if (decisionPath && decisionPath.length > 0) {
     var stepsHTML = decisionPath.map(function(d, i) {
       var line = (i < decisionPath.length - 1) ? '<div class="sp-dp-vline"></div>' : '';
-      return '<div class="sp-dp-step">' +
+      var clickable = !!d.qid;
+      var openTag = clickable
+        ? '<button type="button" class="sp-dp-step sp-dp-step-jumpable" data-spjump="' + escHTML(d.qid) + '" aria-label="Edit answer to: ' + escHTML(d.q) + '">'
+        : '<div class="sp-dp-step">';
+      var closeTag = clickable ? '</button>' : '</div>';
+      var editHint = clickable ? '<span class="sp-dp-edit" aria-hidden="true">edit ✎</span>' : '';
+      return openTag +
                '<div class="sp-dp-line-wrap">' +
                  '<div class="sp-dp-circle"><svg width="10" height="10" viewBox="0 0 8 8"><path d="M1.5 4l2 2 3-3" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>' +
                  line +
                '</div>' +
                '<div class="sp-dp-content">' +
-                 '<div class="sp-dp-q">' + escHTML(d.q) + '</div>' +
+                 '<div class="sp-dp-q">' + escHTML(d.q) + editHint + '</div>' +
                  '<div class="sp-dp-a">' + escHTML(d.a) + '</div>' +
                '</div>' +
-             '</div>';
+             closeTag;
     }).join('');
     dpHTML = '<div class="sp-dp">' +
                '<div class="sp-dp-title">' +
                  '<svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="5" y1="3" x2="5" y2="7" stroke="currentColor" stroke-width="1.5"/></svg>' +
                  ' How we got here' +
+                 (decisionPath.some(function(d){return d.qid;}) ? '<span class="sp-dp-hint"> · click any step to change your answer</span>' : '') +
                '</div>' +
                '<div class="sp-dp-steps">' + stepsHTML + '</div>' +
              '</div>';
@@ -2430,6 +2941,37 @@ var SP_WIZ_QUESTIONS = [
     showIf:function(a){return a.purpose!=='predict';} },
   { id:'normal', q:'Is your outcome variable approximately normally distributed?',
     help:'Check this with a histogram or Shapiro-Wilk test. If your sample is large (n > 30 per group), the t-test and ANOVA are robust to mild departures from normality.',
+    helpExtra: {
+      title: 'How to check normality in JASP',
+      sections: [
+        {
+          h: 'Step-by-step',
+          steps: [
+            'Open your data file in JASP.',
+            'Go to <code>Descriptives</code> → <code>Descriptives</code>.',
+            'Move your outcome variable into <em>Variables</em>.',
+            'Open <em>Plots</em> and tick <code>Distribution plots</code> (histogram).',
+            'Open <em>Statistics</em> → <em>Distribution</em> and tick <code>Shapiro-Wilk</code>.',
+            'Look at the W statistic and the <em>p</em> value in the output table.'
+          ]
+        },
+        {
+          h: 'How to interpret',
+          notes: [
+            '<strong>p &gt; .05</strong> → data is consistent with a normal distribution → use parametric tests (t-test, ANOVA).',
+            '<strong>p &lt; .05</strong> → data significantly deviates from normal → use non-parametric tests (Mann-Whitney, Wilcoxon, Kruskal-Wallis).',
+            'Always also <strong>look at the histogram</strong>. With large samples (n &gt; 30 per group) Shapiro-Wilk becomes oversensitive — even tiny deviations show up as significant. The histogram tells you whether the deviation matters.',
+            'The t-test and ANOVA are <strong>robust</strong> to mild non-normality with n &gt; 30 per group, so don\'t panic if Shapiro-Wilk is just barely significant.'
+          ]
+        },
+        {
+          h: 'Quicker alternative',
+          notes: [
+            'If you\'re using the <strong>"With data"</strong> mode of this tool, normality is detected automatically when you upload your file — no JASP needed for this step.'
+          ]
+        }
+      ]
+    },
     options:[
       {val:'yes', label:'Yes — data is approximately normal', desc:'Use parametric tests'},
       {val:'no',  label:'No — data is skewed or non-normal',  desc:'Use non-parametric tests'},
@@ -2476,29 +3018,29 @@ function spWizDecide(a) {
   var isNorm = normal === 'yes';
 
   if (purpose === 'relate') {
-    path.push({q:'Purpose', a:'Association between variables'});
-    if (assoc_type === 'categorical') { path.push({q:'Variable types', a:'One or both categorical'}); return {key:'chi_square', path:path}; }
-    if (assoc_type === 'one_ordinal') { path.push({q:'Variable types', a:'One or both ordinal'}); return {key:'spearman', path:path}; }
-    path.push({q:'Variable types', a:'Both continuous (scale)'});
-    if (assoc_normal === 'yes') { path.push({q:'Normality', a:'Approximately normal'}); return {key:'pearson', path:path}; }
-    path.push({q:'Normality', a:'Not normal or unsure'}); return {key:'spearman', path:path};
+    path.push({qid:'purpose', q:'Purpose', a:'Association between variables'});
+    if (assoc_type === 'categorical') { path.push({qid:'assoc_type', q:'Variable types', a:'One or both categorical'}); return {key:'chi_square', path:path}; }
+    if (assoc_type === 'one_ordinal') { path.push({qid:'assoc_type', q:'Variable types', a:'One or both ordinal'}); return {key:'spearman', path:path}; }
+    path.push({qid:'assoc_type', q:'Variable types', a:'Both continuous (scale)'});
+    if (assoc_normal === 'yes') { path.push({qid:'assoc_normal', q:'Normality', a:'Approximately normal'}); return {key:'pearson', path:path}; }
+    path.push({qid:'assoc_normal', q:'Normality', a:'Not normal or unsure'}); return {key:'spearman', path:path};
   }
   if (purpose === 'predict') {
-    path.push({q:'Purpose', a:'Predict an outcome'});
-    if (outcome_predict === 'binary') { path.push({q:'Outcome type', a:'Binary / categorical'}); return {key:'logistic', path:path}; }
-    path.push({q:'Outcome type', a:'Continuous'});
-    if (predictors === '2+') { path.push({q:'Number of predictors', a:'2 or more'}); return {key:'multiple_regression', path:path}; }
-    path.push({q:'Number of predictors', a:'One'}); return {key:'simple_regression', path:path};
+    path.push({qid:'purpose', q:'Purpose', a:'Predict an outcome'});
+    if (outcome_predict === 'binary') { path.push({qid:'outcome_predict', q:'Outcome type', a:'Binary / categorical'}); return {key:'logistic', path:path}; }
+    path.push({qid:'outcome_predict', q:'Outcome type', a:'Continuous'});
+    if (predictors === '2+') { path.push({qid:'predictors', q:'Number of predictors', a:'2 or more'}); return {key:'multiple_regression', path:path}; }
+    path.push({qid:'predictors', q:'Number of predictors', a:'One'}); return {key:'simple_regression', path:path};
   }
   // DIFFER
-  path.push({q:'Purpose', a:'Differences between groups'});
-  if (outcome_type === 'nominal') { path.push({q:'Outcome type', a:'Nominal / categorical'}); return {key:'chi_square', path:path}; }
+  path.push({qid:'purpose', q:'Purpose', a:'Differences between groups'});
+  if (outcome_type === 'nominal') { path.push({qid:'outcome_type', q:'Outcome type', a:'Nominal / categorical'}); return {key:'chi_square', path:path}; }
   var isScale = outcome_type === 'scale';
   var parametric = isScale && isNorm;
-  path.push({q:'Groups', a: groups === '2' ? 'Two groups' : 'Three or more groups'});
-  path.push({q:'Design', a: paired === 'paired' ? 'Matched / repeated measures' : 'Independent groups'});
-  path.push({q:'Outcome type', a: isScale ? 'Scale' : 'Ordinal'});
-  if (isScale) path.push({q:'Normality', a: isNorm ? 'Normal' : 'Non-normal'});
+  path.push({qid:'groups', q:'Groups', a: groups === '2' ? 'Two groups' : 'Three or more groups'});
+  path.push({qid:'paired', q:'Design', a: paired === 'paired' ? 'Matched / repeated measures' : 'Independent groups'});
+  path.push({qid:'outcome_type', q:'Outcome type', a: isScale ? 'Scale' : 'Ordinal'});
+  if (isScale) path.push({qid:'normal', q:'Normality', a: isNorm ? 'Normal' : 'Non-normal'});
 
   if (groups === '2') {
     if (paired === 'paired') return {key: parametric ? 'paired_t' : 'wilcoxon', path:path};
@@ -2507,7 +3049,7 @@ function spWizDecide(a) {
   // 3+
   if (paired === 'paired') return {key: parametric ? 'repeated_anova' : 'friedman', path:path};
   if (parametric) {
-    if (covariate === 'yes') { path.push({q:'Covariate', a:'Yes — controlling for covariate'}); return {key:'ancova', path:path}; }
+    if (covariate === 'yes') { path.push({qid:'covariate', q:'Covariate', a:'Yes — controlling for covariate'}); return {key:'ancova', path:path}; }
     return {key:'one_way_anova', path:path};
   }
   return {key:'kruskal', path:path};
@@ -2595,7 +3137,14 @@ function spRenderSBS() {
     '<div class="sp-wiz-card" role="form" aria-label="Question ' + (currentIdx + 1) + '">' +
       '<div class="sp-wiz-q-num">Question ' + (currentIdx + 1) + '</div>' +
       '<div class="sp-wiz-q-text" id="sp-wiz-q-' + currentIdx + '">' + escHTML(q.q) + '</div>' +
-      (q.help ? '<div class="sp-wiz-q-help">' + escHTML(q.help) + '</div>' : '') +
+      (q.help
+        ? '<div class="sp-wiz-q-help">' + escHTML(q.help) +
+            (q.helpExtra ? ' <button type="button" class="sp-help-trigger" data-sphelp="' + escHTML(q.id) + '" aria-label="Show me how">' +
+              '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="6" x2="8" y2="11"/><circle cx="8" cy="4.5" r="0.6" fill="currentColor"/></svg>' +
+              '<span>Show me how</span>' +
+            '</button>' : '') +
+          '</div>'
+        : '') +
       '<div class="sp-wiz-options" role="group" aria-labelledby="sp-wiz-q-' + currentIdx + '">' + optsHTML + '</div>' +
       '<div class="sp-wiz-nav">' +
         '<button type="button" class="sp-wiz-back" data-spaction="wiz-back" ' + (currentIdx === 0 ? 'disabled' : '') + '>← Back</button>' +
@@ -2650,6 +3199,48 @@ function spWizBack() {
   spRenderSBS();
 }
 
+// Back from the result card: clear the LAST answer only, taking the user back
+// to the final question with all earlier answers preserved.
+function spWizBackFromResult() {
+  document.getElementById('sp-wiz-result').style.display = 'none';
+  var visible = spVisibleQs(spWizAnswers);
+  if (visible.length > 0) {
+    delete spWizAnswers[visible[visible.length - 1].id];
+  }
+  if (spWizMode === 'sbs') {
+    spRenderSBS();
+  } else {
+    spRenderAll();
+  }
+  // Scroll up so user can see the question they're now on
+  setTimeout(function() {
+    var prog = document.getElementById('sp-prog-wrap');
+    if (prog) prog.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 50);
+}
+
+// Jump back to a specific question in the decision path. Clears that
+// question's answer (and any answers after it) so the user can re-answer.
+function spWizJumpToQuestion(qid) {
+  document.getElementById('sp-wiz-result').style.display = 'none';
+  var visible = spVisibleQs(spWizAnswers);
+  var idx = -1;
+  for (var i = 0; i < visible.length; i++) if (visible[i].id === qid) { idx = i; break; }
+  if (idx >= 0) {
+    // Clear this question and all subsequent ones
+    visible.slice(idx).forEach(function(q) { delete spWizAnswers[q.id]; });
+  }
+  if (spWizMode === 'sbs') {
+    spRenderSBS();
+  } else {
+    spRenderAll();
+  }
+  setTimeout(function() {
+    var prog = document.getElementById('sp-prog-wrap');
+    if (prog) prog.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 50);
+}
+
 function spShowResult() {
   var res = spWizDecide(spWizAnswers);
   document.getElementById('sp-wiz-sbs-body').innerHTML = '';
@@ -2692,12 +3283,41 @@ var SP_TEMPLATES = [
   {id:'predict',       label:'Does [A] predict [B]?'},
   {id:'relate',        label:'Is [A] related to [B]?'}
 ];
+
+// Plain-language explanations for jargon in the question builder. These appear
+// in a small "i" tooltip next to the clarifier label so students don't have
+// to know what "simple", "multiple", "covariate", "ANCOVA" mean already.
+var SP_CLAR_TIPS = {
+  paired:
+    '<strong>Different / independent</strong> — two separate groups of people are being compared (e.g. men vs women, treatment vs control). Each row of your data is a different person.<br><br>' +
+    '<strong>Same / repeated (paired)</strong> — the same people are measured twice or more (e.g. pre-test vs post-test, measurement at two timepoints). Each row of your data is one person, with the repeated measurements in different columns.',
+  predictors:
+    '<strong>Simple regression</strong> uses one predictor variable to predict your outcome — you\'re asking "does X predict Y?".<br><br>' +
+    '<strong>Multiple regression</strong> uses two or more predictors at the same time — you\'re asking "do X1, X2 and X3 together predict Y, and which matters most?".',
+  covariate:
+    'A <strong>covariate</strong> is a continuous variable you want to <em>statistically control for</em> when comparing groups.<br><br>' +
+    'For example: if you\'re comparing test scores across three teaching methods, but you suspect age also affects scores, you can include age as a covariate to remove its effect from the comparison.<br><br>' +
+    'Selecting "Yes" gives you <strong>ANCOVA</strong> (Analysis of Covariance) — same idea as ANOVA, just with the covariate held constant.'
+};
+
 var SP_SENT = {
   differ:        function(a,b,ta,tb){return 'Is <span class="sp-var-chip ' + ta + '">' + escHTML(a) + '</span> different from <span class="sp-var-chip ' + tb + '">' + escHTML(b) + '</span>?';},
   differ_groups: function(a,b,ta,tb){return 'Does <span class="sp-var-chip ' + ta + '">' + escHTML(a) + '</span> differ across groups of <span class="sp-var-chip ' + tb + '">' + escHTML(b) + '</span>?';},
   predict:       function(a,b,ta,tb){return 'Does <span class="sp-var-chip ' + ta + '">' + escHTML(a) + '</span> predict <span class="sp-var-chip ' + tb + '">' + escHTML(b) + '</span>?';},
   relate:        function(a,b,ta,tb){return 'Is <span class="sp-var-chip ' + ta + '">' + escHTML(a) + '</span> related to <span class="sp-var-chip ' + tb + '">' + escHTML(b) + '</span>?';}
 };
+
+// Renders an inline "i" tooltip badge. Pass a key into SP_CLAR_TIPS.
+function spInfoTip(tipKey) {
+  var html = SP_CLAR_TIPS[tipKey];
+  if (!html) return '';
+  return '<span class="sp-infotip" tabindex="0" role="button" aria-label="More info">' +
+           '<svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+             '<circle cx="8" cy="8" r="6.5"/><line x1="8" y1="6" x2="8" y2="11"/><circle cx="8" cy="4.5" r="0.6" fill="currentColor"/>' +
+           '</svg>' +
+           '<span class="sp-infotip-bubble" role="tooltip">' + html + '</span>' +
+         '</span>';
+}
 
 function spMean(arr) { return arr.reduce(function(a,b){return a+b;}, 0) / arr.length; }
 function spShapiroApprox(arr) {
@@ -2902,20 +3522,55 @@ function spRenderRows() {
       '</div>' : '';
     var clars = '';
     if (tpl && (tpl.id === 'differ' || tpl.id === 'differ_groups')) {
-      clars += '<div class="sp-clar"><span class="sp-clar-lbl">Participants</span>' +
-        '<select data-spaction="row-update" data-sprow="' + row.id + '" data-spfield="paired" aria-label="Same or different participants">' +
-          '<option value="">— same or different? —</option>' +
-          '<option value="independent"' + (row.paired==='independent'?' selected':'') + '>Different (independent)</option>' +
-          '<option value="paired"' + (row.paired==='paired'?' selected':'') + '>Same / repeated (paired)</option>' +
-        '</select></div>';
-      if (tpl.id === 'differ_groups') {
+      // Auto-detect: when comparing across a categorical grouping variable
+      // (e.g. Gender, Condition), the design is BETWEEN-subjects by definition.
+      // No need to ask the user — silently set, and don't show the dropdown.
+      // We detect this by checking whether varB is nominal.
+      var groupingVar = (tB === 'nominal') ? row.varB : null;
+      var autoIndependent = !!groupingVar;
+      if (autoIndependent && row.paired !== 'independent') {
+        row.paired = 'independent';
+      }
+
+      // Auto-detect number of groups from the unique values in the grouping
+      // variable, when one exists. This skips the "2 vs 3+" question entirely.
+      var autoGroups = null;
+      if (groupingVar) {
+        var gv = spVariables.filter(function(v){return v && v.name === groupingVar;})[0];
+        if (gv) {
+          autoGroups = (gv.uniqueCount === 2) ? '2' : (gv.uniqueCount >= 3 ? '3+' : null);
+          if (autoGroups && row.groups !== autoGroups) row.groups = autoGroups;
+        }
+      }
+
+      if (autoIndependent) {
+        // Show a tiny inline note instead of a dropdown
+        clars += '<div class="sp-clar sp-clar-auto">' +
+          '<span class="sp-clar-lbl">Design</span>' +
+          '<span class="sp-auto-note">Between-subjects' +
+            (autoGroups === '2' ? ' · 2 groups' : (autoGroups === '3+' ? ' · 3+ groups' : '')) +
+            ' <span class="sp-auto-tag">auto-detected from <em>' + escHTML(groupingVar) + '</em></span>' +
+          '</span>' +
+        '</div>';
+      } else {
+        clars += '<div class="sp-clar"><span class="sp-clar-lbl">Participants' + spInfoTip('paired') + '</span>' +
+          '<select data-spaction="row-update" data-sprow="' + row.id + '" data-spfield="paired" aria-label="Same or different participants">' +
+            '<option value="">— same or different? —</option>' +
+            '<option value="independent"' + (row.paired==='independent'?' selected':'') + '>Different (independent)</option>' +
+            '<option value="paired"' + (row.paired==='paired'?' selected':'') + '>Same / repeated (paired)</option>' +
+          '</select></div>';
+      }
+
+      if (tpl.id === 'differ_groups' && !autoGroups) {
         clars += '<div class="sp-clar"><span class="sp-clar-lbl">Groups</span>' +
           '<select data-spaction="row-update" data-sprow="' + row.id + '" data-spfield="groups" aria-label="Number of groups">' +
             '<option value="">—</option>' +
             '<option value="2"' + (row.groups==='2'?' selected':'') + '>2 groups</option>' +
             '<option value="3+"' + (row.groups==='3+'?' selected':'') + '>3+ groups</option>' +
           '</select></div>';
-        clars += '<div class="sp-clar"><span class="sp-clar-lbl">Covariate?</span>' +
+      }
+      if (tpl.id === 'differ_groups') {
+        clars += '<div class="sp-clar"><span class="sp-clar-lbl">Covariate?' + spInfoTip('covariate') + '</span>' +
           '<select data-spaction="row-update" data-sprow="' + row.id + '" data-spfield="covariates" aria-label="Include covariate">' +
             '<option value="no"' + (row.covariates!=='yes'?' selected':'') + '>None</option>' +
             '<option value="yes"' + (row.covariates==='yes'?' selected':'') + '>Yes (ANCOVA)</option>' +
@@ -2923,7 +3578,7 @@ function spRenderRows() {
       }
     }
     if (tpl && tpl.id === 'predict') {
-      clars += '<div class="sp-clar"><span class="sp-clar-lbl">Predictors</span>' +
+      clars += '<div class="sp-clar"><span class="sp-clar-lbl">Predictors' + spInfoTip('predictors') + '</span>' +
         '<select data-spaction="row-update" data-sprow="' + row.id + '" data-spfield="groups" aria-label="Number of predictors">' +
           '<option value="">—</option>' +
           '<option value="1"' + (row.groups==='1'?' selected':'') + '>1 (simple)</option>' +
@@ -3216,9 +3871,14 @@ function bindAll() {
   document.getElementById('sp-wmt-sbs').addEventListener('click', function() { spSetWizMode('sbs'); });
   document.getElementById('sp-wmt-all').addEventListener('click', function() { spSetWizMode('all'); });
 
-  // StatPath: reset wizard (delegated since may not exist initially)
+  // StatPath: reset wizard, back-from-result, jump-to-question (delegated)
   document.body.addEventListener('click', function(e) {
-    if (e.target && e.target.id === 'sp-reset-wizard-btn') spResetWizard();
+    if (!e.target) return;
+    var t = e.target.closest('[id], [data-spjump]');
+    if (!t) return;
+    if (t.id === 'sp-reset-wizard-btn') spResetWizard();
+    else if (t.id === 'sp-back-wizard-btn') spWizBackFromResult();
+    else if (t.dataset && t.dataset.spjump) spWizJumpToQuestion(t.dataset.spjump);
   });
 
   // StatPath: file upload
@@ -3393,9 +4053,74 @@ function bindAll() {
   modalReport.addEventListener('click', function(e) {
     if (e.target === modalReport) closeReportModal();
   });
-  // Escape to close
+
+  // ──────────── Help-extra modal (per-question walkthroughs) ────────────
+  var modalHelp = document.getElementById('modal-help');
+
+  function buildHelpBody(extra) {
+    return extra.sections.map(function(sec) {
+      var inner = '';
+      if (sec.steps) {
+        inner = '<div class="help-step-list">' +
+          sec.steps.map(function(s) { return '<div class="help-step"><div>' + s + '</div></div>'; }).join('') +
+          '</div>';
+      } else if (sec.notes) {
+        inner = '<div class="help-note-list">' +
+          sec.notes.map(function(n) { return '<div class="help-note">' + n + '</div>'; }).join('') +
+          '</div>';
+      }
+      return '<div class="help-section">' +
+               '<div class="help-section-h">' + escHTML(sec.h) + '</div>' +
+               inner +
+             '</div>';
+    }).join('');
+  }
+
+  function openHelpModal(qid) {
+    var q = SP_WIZ_QUESTIONS.filter(function(x){return x.id === qid;})[0];
+    if (!q || !q.helpExtra) return;
+    document.getElementById('modal-help-title').textContent = q.helpExtra.title;
+    document.getElementById('help-body').innerHTML = buildHelpBody(q.helpExtra);
+    modalHelp.classList.add('open');
+    setTimeout(function() {
+      var c = document.getElementById('help-close');
+      if (c) c.focus();
+    }, 120);
+    track('statpath/help/' + qid, 'Opened help: ' + qid);
+  }
+  function closeHelpModal() { modalHelp.classList.remove('open'); }
+
+  // Trigger button (delegated since wizard re-renders)
+  document.body.addEventListener('click', function(e) {
+    var t = e.target.closest && e.target.closest('[data-sphelp]');
+    if (t) { e.preventDefault(); openHelpModal(t.dataset.sphelp); }
+  });
+
+  // Infotips: tap-to-toggle on mobile, plus click-outside-to-close.
+  // (Hover/focus on desktop is handled purely by CSS.)
+  document.body.addEventListener('click', function(e) {
+    var tip = e.target.closest && e.target.closest('.sp-infotip');
+    // Close any open tips that the click is OUTSIDE of
+    document.querySelectorAll('.sp-infotip.open').forEach(function(t) {
+      if (t !== tip) t.classList.remove('open');
+    });
+    if (tip) {
+      e.preventDefault();
+      tip.classList.toggle('open');
+    }
+  });
+
+  document.getElementById('help-close').addEventListener('click', closeHelpModal);
+  document.getElementById('help-close-x').addEventListener('click', closeHelpModal);
+  modalHelp.addEventListener('click', function(e) {
+    if (e.target === modalHelp) closeHelpModal();
+  });
+
+  // Escape closes whichever modal is open
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && modalReport.classList.contains('open')) closeReportModal();
+    if (e.key !== 'Escape') return;
+    if (modalReport.classList.contains('open')) closeReportModal();
+    else if (modalHelp.classList.contains('open')) closeHelpModal();
   });
 
   // Send via EmailJS — same service/template as OpenTag
