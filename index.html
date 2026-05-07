@@ -1994,6 +1994,321 @@ button.sp-dp-step-jumpable:hover .sp-dp-q { color: var(--accent); }
 }
 
 /* ============================================================
+   DATA SCIENCE TAB (beta)
+   ============================================================ */
+
+/* "beta" badge in tab label */
+.beta-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  font-size: 9px;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid rgba(0,113,227,0.25);
+  border-radius: var(--radius-pill);
+  vertical-align: 1px;
+  line-height: 1.4;
+}
+.tab-btn.active .beta-tag {
+  background: var(--surface);
+  color: var(--accent);
+  border-color: rgba(0,113,227,0.25);
+}
+
+/* Honesty banner under panel intro */
+.ds-honesty {
+  margin-top: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: var(--paper-2);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--rule);
+  display: flex; align-items: flex-start; gap: var(--space-3);
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+  line-height: var(--lh-base);
+  max-width: 60ch;
+}
+.ds-honesty svg { color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+.ds-honesty strong { color: var(--ink); font-weight: var(--fw-semibold); }
+.ds-honesty em { font-style: italic; color: var(--ink-2); }
+
+/* Sub-flow chooser (3 cards) */
+.ds-chooser {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+@media (min-width: 720px) { .ds-chooser { grid-template-columns: 1fr 1fr 1fr; } }
+
+.ds-card {
+  position: relative;
+  padding: var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: left;
+  display: flex; flex-direction: column; gap: var(--space-2);
+  transition: border-color var(--dur-base) var(--ease-standard),
+              box-shadow var(--dur-base) var(--ease-standard),
+              transform var(--dur-base) var(--ease-spring);
+  font-family: inherit;
+  width: 100%;
+  min-height: 44px;
+  color: var(--ink);
+}
+.ds-card:hover, .ds-card:focus-visible {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.ds-card-icon {
+  width: 44px; height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: var(--space-2);
+}
+.ds-card-title {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-lg);
+  letter-spacing: var(--tracking-snug);
+  margin-bottom: var(--space-1);
+}
+.ds-card-desc {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  line-height: var(--lh-base);
+  flex: 1;
+}
+.ds-card-cta {
+  margin-top: var(--space-3);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+
+/* Sub-wizard area */
+.ds-wiz-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--rule);
+}
+.ds-wiz-flow-label {
+  font-family: var(--font-display);
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-snug);
+  color: var(--ink);
+}
+
+/* Result card — shared base style for chart / model / metric */
+.ds-result-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  animation: cardIn var(--dur-slow) var(--ease-spring) both;
+}
+.ds-result-header {
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--rule);
+}
+.ds-result-eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-2);
+}
+.ds-result-name {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--lh-tight);
+  color: var(--ink);
+}
+.ds-result-class {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-xs);
+  padding: 2px 6px;
+  color: var(--ink-2);
+  margin-top: var(--space-2);
+}
+.ds-result-why {
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  line-height: var(--lh-base);
+  margin-bottom: var(--space-5);
+}
+.ds-result-why strong, .ds-result-why em { color: var(--ink); }
+
+/* Code block for snippets */
+.ds-code-wrap {
+  position: relative;
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+  overflow: hidden;
+}
+.ds-code-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  color: var(--ink-3);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+.ds-code-copy {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+  min-height: 32px;
+}
+.ds-code-copy:hover { background: var(--accent-soft); border-color: rgba(0,113,227,0.25); }
+.ds-code-copy.copied { color: var(--ok); }
+.ds-code-copy svg { display: block; }
+
+.ds-code-block {
+  display: block;
+  padding: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--ink);
+  white-space: pre;
+  overflow-x: auto;
+  background: var(--paper);
+  margin: 0;
+}
+
+/* Sections inside result */
+.ds-section {
+  margin-bottom: var(--space-4);
+}
+.ds-section:last-child { margin-bottom: 0; }
+.ds-section-h {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: var(--space-2);
+}
+.ds-section ul {
+  margin: 0;
+  padding-left: var(--space-5);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-base);
+  color: var(--ink-2);
+}
+.ds-section li { margin-bottom: var(--space-2); }
+.ds-section li:last-child { margin-bottom: 0; }
+.ds-section li code, .ds-result-why code, .ds-runner code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--paper-2);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--rule);
+  color: var(--accent);
+}
+
+/* Runner-up section (model only) */
+.ds-runner {
+  background: var(--paper-2);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--rule);
+  padding: var(--space-3) var(--space-4);
+  margin-top: var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--ink-2);
+  line-height: var(--lh-base);
+}
+.ds-runner-head {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  color: var(--ink-3);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+.ds-runner-name {
+  font-weight: var(--fw-semibold);
+  color: var(--ink);
+}
+
+/* Docs link */
+.ds-docs-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  background: var(--paper-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--ink-2);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: all var(--dur-fast);
+  min-height: 32px;
+}
+.ds-docs-link:hover {
+  background: var(--accent-soft);
+  border-color: rgba(0,113,227,0.25);
+  color: var(--accent);
+}
+.ds-docs-link svg { color: currentColor; }
+
+/* "Always also look at..." callout */
+.ds-also {
+  margin-top: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--ok-bg);
+  border: 1px solid rgba(0,135,90,0.18);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-xs);
+  color: var(--ink-2);
+}
+.ds-also strong { color: var(--ok); font-weight: var(--fw-semibold); }
+
+/* ============================================================
    MODAL — used for Report Issue
    ============================================================ */
 .modal-overlay {
@@ -2277,6 +2592,10 @@ button.sp-dp-step-jumpable:hover .sp-dp-q { color: var(--accent); }
         </button>
         <button class="tab-btn" data-tab="power" role="tab" aria-selected="false" aria-controls="panel-power" id="tab-power" tabindex="-1">
           Sample Size
+        </button>
+        <button class="tab-btn" data-tab="ds" role="tab" aria-selected="false" aria-controls="panel-ds" id="tab-ds" tabindex="-1">
+          Data Science
+          <span class="beta-tag" aria-label="beta">beta</span>
         </button>
       </div>
     </nav>
@@ -2623,6 +2942,83 @@ button.sp-dp-step-jumpable:hover .sp-dp-q { color: var(--accent); }
           Based on Cohen, J. (1988). <em>Statistical power analysis for the behavioral sciences</em> (2nd ed.). Lawrence Erlbaum Associates. For educational use — verify with your supervisor or G*Power.
         </p>
       </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         PANEL 3 — DATA SCIENCE (beta)
+         ═══════════════════════════════════════════════════════ -->
+    <section class="panel" id="panel-ds" role="tabpanel" aria-labelledby="tab-ds" hidden>
+
+      <div class="panel-intro">
+        <div class="panel-eyebrow">Beta · for sklearn-shaped courses</div>
+        <h1 class="panel-title">Data science <em>decisions</em> made easier</h1>
+        <p class="panel-sub">Three small flowcharts for the common questions: which chart should I use, which model should I try first, which metric should I report. Each result gives you a Python snippet ready to paste, plus links to the docs so you can learn beyond the recommendation.</p>
+        <div class="ds-honesty">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><line x1="8" y1="6" x2="8" y2="11"/><circle cx="8" cy="4.5" r="0.6" fill="currentColor"/></svg>
+          <span><strong>Heads up:</strong> data science is more contested than classical statistics. These recommendations are sensible <em>first tries</em>, and should be treated as gospel. Two reasonable data scientists will sometimes give different answers. That is fine, so try and work out what works best for your work given the suggestions here.</span>
+        </div>
+      </div>
+
+      <!-- Sub-flow chooser cards -->
+      <div class="ds-chooser" id="ds-chooser">
+        <button type="button" class="ds-card" data-dsflow="chart">
+          <div class="ds-card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="13" width="3" height="5"/><rect x="12" y="9" width="3" height="9"/><rect x="17" y="5" width="3" height="13"/></svg>
+          </div>
+          <div class="ds-card-title">Pick a Chart</div>
+          <div class="ds-card-desc">Visualise your data — choose from histograms, box plots, scatter plots, time-series views, and more.</div>
+          <div class="ds-card-cta">Choose a chart →</div>
+        </button>
+
+        <button type="button" class="ds-card" data-dsflow="model">
+          <div class="ds-card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
+          </div>
+          <div class="ds-card-title">Pick a Model</div>
+          <div class="ds-card-desc">Get a starting model for your task — regression, classification, clustering, time series. Comes with sklearn snippets.</div>
+          <div class="ds-card-cta">Choose a model →</div>
+        </button>
+
+        <button type="button" class="ds-card" data-dsflow="metric">
+          <div class="ds-card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+          </div>
+          <div class="ds-card-title">Pick a Metric</div>
+          <div class="ds-card-desc">Choose how to evaluate your model — MAE, F1, ROC AUC, MASE, etc. Each comes with what "good" looks like.</div>
+          <div class="ds-card-cta">Choose a metric →</div>
+        </button>
+      </div>
+
+      <!-- Sub-wizard: shown when a flow is active -->
+      <div class="ds-wiz" id="ds-wiz" style="display: none;">
+        <div class="ds-wiz-bar">
+          <button type="button" class="btn btn-ghost" id="ds-wiz-back-to-chooser">← All sub-flows</button>
+          <span class="ds-wiz-flow-label" id="ds-wiz-flow-label"></span>
+        </div>
+        <div class="sp-prog-wrap" id="ds-prog-wrap" aria-live="polite" aria-atomic="true">
+          <div class="sp-prog-meta">
+            <span id="ds-prog-label">Question 1</span>
+            <span class="sp-prog-pct" id="ds-prog-pct">0%</span>
+          </div>
+          <div class="sp-prog-bar">
+            <div class="sp-prog-fill" id="ds-prog-fill" style="width: 0%"></div>
+          </div>
+        </div>
+        <div id="ds-wiz-body"></div>
+      </div>
+
+      <!-- Result -->
+      <div class="ds-result" id="ds-result" style="display: none;" role="status" aria-live="polite">
+        <div class="sp-reset-bar">
+          <span class="sp-res-counter" id="ds-result-counter">Recommendation</span>
+          <div style="display: flex; gap: var(--space-2);">
+            <button class="btn btn-ghost" id="ds-back-to-wiz-btn">← Back</button>
+            <button class="btn btn-ghost" id="ds-reset-btn">↺ Start over</button>
+          </div>
+        </div>
+        <div id="ds-result-card"></div>
+      </div>
+
     </section>
 
   </main>
@@ -3834,6 +4230,1043 @@ function pcUpdate() {
 }
 
 
+
+// ═══════════════════════════════════════════════════════════════
+// DATA SCIENCE (beta) — content definitions
+// All sub-flows share the same pattern: questions → decide() → result card
+// Honesty note: ML is contested. Recommendations are "good first tries", not gospel.
+// ═══════════════════════════════════════════════════════════════
+
+// ────────────────────────────────────────────────────────────────
+// PICK A CHART — 18 chart types
+// ────────────────────────────────────────────────────────────────
+var DS_CHARTS = {
+  histogram: {
+    name: 'Histogram',
+    why: 'Histograms show the shape of a single numeric variable\'s distribution — where values cluster, how spread out they are, whether there\'s skew or multiple peaks.',
+    code: 'import seaborn as sns\nimport matplotlib.pyplot as plt\n\nsns.histplot(data=df, x=\'your_variable\', bins=30, kde=True)\nplt.show()',
+    pitfalls: [
+      'Bin width matters — too few bins hide the shape, too many add noise. Start with 20–30 bins and adjust.',
+      'For very small samples (n &lt; 30), prefer a strip plot or ECDF instead.'
+    ],
+    docs: 'https://seaborn.pydata.org/generated/seaborn.histplot.html'
+  },
+  boxplot: {
+    name: 'Box plot',
+    why: 'Box plots compare the distribution of a numeric variable across categories. They show median, quartiles, and outliers in a compact form — perfect for "is X different across groups?".',
+    code: 'import seaborn as sns\nimport matplotlib.pyplot as plt\n\nsns.boxplot(data=df, x=\'group\', y=\'numeric_var\')\nplt.show()',
+    pitfalls: [
+      'Hides the actual sample size — pair with a strip plot overlay if n &lt; 30 per group.',
+      'Doesn\'t show multimodality. If the distribution has two peaks, a violin plot is better.'
+    ],
+    docs: 'https://seaborn.pydata.org/generated/seaborn.boxplot.html'
+  },
+  violin: {
+    name: 'Violin plot',
+    why: 'Violin plots combine a box plot with a kernel density estimate, so you see the full distribution shape <em>and</em> the summary statistics. Great when the box plot loses important detail.',
+    code: 'import seaborn as sns\nimport matplotlib.pyplot as plt\n\nsns.violinplot(data=df, x=\'group\', y=\'numeric_var\', inner=\'quartile\')\nplt.show()',
+    pitfalls: [
+      'KDE smoothing assumes a continuous distribution — can mislead for highly discrete data.',
+      'Needs n ≥ 30 per group to be meaningful.'
+    ],
+    docs: 'https://seaborn.pydata.org/generated/seaborn.violinplot.html'
+  },
+  strip_swarm: {
+    name: 'Strip / swarm plot',
+    why: 'Strip and swarm plots show every individual data point. Best for small samples (n &lt; 50 per group) where you want full transparency about your data.',
+    code: 'import seaborn as sns\nimport matplotlib.pyplot as plt\n\n# swarmplot avoids overlapping points; stripplot is faster for larger n\nsns.swarmplot(data=df, x=\'group\', y=\'numeric_var\')\nplt.show()',
+    pitfalls: [
+      '<code>swarmplot</code> gets slow and visually noisy for n &gt; 100 per group — switch to <code>stripplot</code> with jitter, or a violin plot.',
+      'Layer with a box plot for both points and summary: <code>sns.boxplot(...); sns.swarmplot(...)</code>.'
+    ],
+    docs: 'https://seaborn.pydata.org/generated/seaborn.swarmplot.html'
+  },
+  bar_count: {
+    name: 'Bar chart (counts)',
+    why: 'A bar chart of category counts is the simplest way to see frequencies of a single categorical variable.',
+    code: 'import seaborn as sns\nimport matplotlib.pyplot as plt\n\nsns.countplot(data=df, x=\'category\', order=df[\'category\'].value_counts().index)\nplt.show()',
+    pitfalls: [
+      'Order bars by count (descending) for easier reading — pass <code>order=...</code> as shown.',
+      'For many categories (&gt; 10), rotate x-axis labels or flip to horizontal: <code>sns.countplot(y=\'category\', ...)</code>.'
+    ],
+    docs: 'https://seaborn.pydata.org/generated/seaborn.countplot.html'
+  },
+  bar_grouped: {
+    name: 'Grouped bar chart',
+    why: 'Grouped bars compare a numeric summary (mean, median, count) across two categorical variables — e.g. mean score by gender within each condition.',
+    code: 'import seaborn as sns\nimport matplotlib.pyplot as plt\n\nsns.barplot(data=df, x=\'main_group\', y=\'numeric_var\', hue=\'sub_group\')\nplt.show()',
+    pitfalls: [
+      'The bars show the <em>mean by default</em>, with confidence intervals. If you want median, use <code>estimator=\'median\'</code>.',
+      'For more than 3 levels in <code>hue</code>, the chart gets cluttered — consider faceting (<code>catplot</code>) instead.'
+    ],
+    docs: 'https://seaborn.pydata.org/generated/seaborn.barplot.html'
+  },
+  scatter: {
+    name: 'Scatter plot',
+    why: 'Scatter plots show the relationship between two numeric variables — direction, strength, linearity, and outliers all visible in one chart.',
+    code: 'import seaborn as sns\nimport matplotlib.pyplot as plt\n\nsns.scatterplot(data=df, x=\'var_x\', y=\'var_y\')\n# Add a trend line if useful:\n# sns.regplot(data=df, x=\'var_x\', y=\'var_y\')\nplt.show()',
+    pitfalls: [
+      'For n &gt; ~5,000 points become overplotted — use <code>alpha=0.3</code> or switch to a hex bin / 2D density plot.',
+      'If x is discrete (e.g. integer ratings), add jitter so points don\'t stack.'
+    ],
+    docs: 'https://seaborn.pydata.org/generated/seaborn.scatterplot.html'
+  },
+  scatter_with_hue: {
+    name: 'Scatter plot with colour',
+    why: 'Adds a third dimension — typically a categorical group — to a scatter plot via colour. Lets you see whether the X–Y relationship differs across groups.',
+    code: 'import seaborn as sns\nimport matplotlib.pyplot as plt\n\nsns.scatterplot(data=df, x=\'var_x\', y=\'var_y\', hue=\'group\', style=\'group\')\nplt.show()',
+    pitfalls: [
+      'Use distinguishable colours — seaborn defaults are colour-blind safe, but custom palettes might not be.',
+      'For 4+ groups, faceting with <code>relplot(col=\'group\')</code> is usually clearer than <code>hue</code>.'
+    ],
+    docs: 'https://seaborn.pydata.org/generated/seaborn.scatterplot.html'
+  },
+  lineplot: {
+    name: 'Line plot',
+    why: 'Line plots are the standard for showing a numeric value changing over time (or any continuous x-axis). Each line is one series.',
+    code: 'import seaborn as sns\nimport matplotlib.pyplot as plt\n\nsns.lineplot(data=df, x=\'date\', y=\'value\')\nplt.xticks(rotation=45)\nplt.show()',
+    pitfalls: [
+      'Don\'t use lines for discrete categories — that implies continuity that isn\'t there.',
+      'For 5+ series, faceting beats colour-coding.'
+    ],
+    docs: 'https://seaborn.pydata.org/generated/seaborn.lineplot.html'
+  },
+  lineplot_with_band: {
+    name: 'Line plot with confidence band',
+    why: 'When you have multiple observations per time point (e.g. participants × time), seaborn auto-computes a 95% confidence band around the mean line. Communicates both trend and uncertainty.',
+    code: 'import seaborn as sns\nimport matplotlib.pyplot as plt\n\n# When df has multiple rows per x value, lineplot averages and adds a CI band\nsns.lineplot(data=df, x=\'time\', y=\'value\', errorbar=(\'ci\', 95))\nplt.show()',
+    pitfalls: [
+      'The band is bootstrap-based — slow for very large datasets. Use <code>errorbar=\'sd\'</code> for a faster (but different) interval.',
+      'Don\'t use a band when you only have one observation per x — there\'s no uncertainty to show.'
+    ],
+    docs: 'https://seaborn.pydata.org/generated/seaborn.lineplot.html'
+  },
+  seasonal_decompose: {
+    name: 'Seasonal decomposition',
+    why: 'For time series, decomposition splits your data into trend + seasonal + residual components. Essential first look at any time-indexed numeric variable.',
+    code: 'import statsmodels.api as sm\nimport matplotlib.pyplot as plt\n\n# Assumes df has a DatetimeIndex; period = expected seasonality (e.g. 12 for monthly)\nresult = sm.tsa.seasonal_decompose(df[\'value\'], model=\'additive\', period=12)\nresult.plot()\nplt.show()',
+    pitfalls: [
+      'You need to know the seasonal period — 12 for monthly, 7 for daily-with-weekly-pattern, etc.',
+      'Use <code>model=\'multiplicative\'</code> when seasonal amplitude grows with the trend.'
+    ],
+    docs: 'https://www.statsmodels.org/stable/generated/statsmodels.tsa.seasonal.seasonal_decompose.html'
+  },
+  acf_plot: {
+    name: 'Autocorrelation plot (ACF)',
+    why: 'Autocorrelation shows how strongly each time point is related to its lagged versions. Critical for diagnosing time series structure and choosing AR/MA terms in ARIMA.',
+    code: 'from statsmodels.graphics.tsaplots import plot_acf, plot_pacf\nimport matplotlib.pyplot as plt\n\nfig, axes = plt.subplots(2, 1, figsize=(10, 6))\nplot_acf(df[\'value\'], lags=40, ax=axes[0])\nplot_pacf(df[\'value\'], lags=40, ax=axes[1])\nplt.show()',
+    pitfalls: [
+      'ACF on non-stationary data is misleading — difference your series first if it has a trend.',
+      'Significant spikes outside the blue band suggest seasonality / autoregressive structure.'
+    ],
+    docs: 'https://www.statsmodels.org/stable/generated/statsmodels.graphics.tsaplots.plot_acf.html'
+  },
+  pairplot: {
+    name: 'Pair plot',
+    why: 'A grid of scatter plots for every pair of numeric variables, with histograms on the diagonal. Excellent for initial exploration of small-to-medium feature sets.',
+    code: 'import seaborn as sns\nimport matplotlib.pyplot as plt\n\nsns.pairplot(df, vars=[\'var1\', \'var2\', \'var3\', \'var4\'], hue=\'group\')\nplt.show()',
+    pitfalls: [
+      'Gets unreadable above ~6 variables — use a correlation heatmap instead.',
+      'Slow on large datasets. Sample down with <code>df.sample(1000)</code> first.'
+    ],
+    docs: 'https://seaborn.pydata.org/generated/seaborn.pairplot.html'
+  },
+  heatmap_corr: {
+    name: 'Correlation heatmap',
+    why: 'When you have many numeric variables (6+), a correlation heatmap is the cleanest summary of pairwise relationships. Reveals clusters of related variables.',
+    code: 'import seaborn as sns\nimport matplotlib.pyplot as plt\n\ncorr = df.select_dtypes(\'number\').corr()\nsns.heatmap(corr, annot=True, cmap=\'RdBu_r\', center=0, fmt=\'.2f\')\nplt.show()',
+    pitfalls: [
+      'Pearson correlation only captures <em>linear</em> relationships — use <code>method=\'spearman\'</code> for monotonic non-linear ones.',
+      'Annotation gets unreadable above ~15 variables; drop <code>annot=True</code>.'
+    ],
+    docs: 'https://seaborn.pydata.org/generated/seaborn.heatmap.html'
+  },
+  pie: {
+    name: 'Pie chart (consider a bar chart instead)',
+    why: 'Pie charts work for very simple parts-of-whole comparisons with ≤4 categories. Honestly, a bar chart is almost always clearer — humans read length more accurately than angle. We\'re including this for completeness, but reach for bars first.',
+    code: 'import matplotlib.pyplot as plt\n\ncounts = df[\'category\'].value_counts()\nplt.pie(counts.values, labels=counts.index, autopct=\'%1.1f%%\', startangle=90)\nplt.axis(\'equal\')\nplt.show()',
+    pitfalls: [
+      'Avoid 3D pie charts — they distort the proportions.',
+      'For more than 4 categories, the slices become indistinguishable. Use a bar chart.',
+      'Never compare two pie charts side-by-side — humans cannot accurately judge differences in angle.'
+    ],
+    docs: 'https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.pie.html'
+  },
+  stacked_bar: {
+    name: 'Stacked bar chart',
+    why: 'Stacked bars show composition (parts of a whole) across groups or over time. Good when the total is meaningful and you want to see both total and breakdown.',
+    code: 'import matplotlib.pyplot as plt\n\n# Pivot to wide format then plot\npivoted = df.groupby([\'group\', \'subgroup\']).size().unstack(fill_value=0)\npivoted.plot(kind=\'bar\', stacked=True)\nplt.show()',
+    pitfalls: [
+      'Hard to compare middle segments because their baselines shift. Use grouped bars if comparing specific subgroups.',
+      'For % composition, normalise first: <code>pivoted.div(pivoted.sum(axis=1), axis=0)</code>.'
+    ],
+    docs: 'https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.bar.html'
+  },
+  ridge: {
+    name: 'Ridge plot (joyplot)',
+    why: 'Ridge plots stack many density curves vertically — perfect for comparing distributions across many categories without the chart becoming a mess.',
+    code: '# Requires: pip install joypy\nimport joypy\nimport matplotlib.pyplot as plt\n\njoypy.joyplot(df, by=\'group\', column=\'numeric_var\', overlap=0.5)\nplt.show()',
+    pitfalls: [
+      'Needs 5+ groups to justify itself — for 2–4 groups, a violin plot is simpler.',
+      'Order matters — sort groups by median or some meaningful axis.'
+    ],
+    docs: 'https://github.com/leotac/joypy'
+  },
+  ecdf: {
+    name: 'ECDF (empirical cumulative distribution)',
+    why: 'ECDFs show every data point on a single curve — no binning, no smoothing, no information lost. Excellent for precise comparisons of distributions.',
+    code: 'import seaborn as sns\nimport matplotlib.pyplot as plt\n\nsns.ecdfplot(data=df, x=\'numeric_var\', hue=\'group\')\nplt.show()',
+    pitfalls: [
+      'Less intuitive than histograms — readers unfamiliar with CDFs may need a brief explanation.',
+      'Powerful for showing whether two distributions differ in shape, location, or both.'
+    ],
+    docs: 'https://seaborn.pydata.org/generated/seaborn.ecdfplot.html'
+  }
+};
+
+// ────────────────────────────────────────────────────────────────
+// PICK A MODEL — 15 model types
+// ────────────────────────────────────────────────────────────────
+var DS_MODELS = {
+  linreg: {
+    name: 'Linear Regression',
+    sklearnClass: 'sklearn.linear_model.LinearRegression',
+    why: 'The classic baseline for predicting a numeric outcome from numeric features. Highly interpretable — every coefficient tells you the effect of that feature.',
+    code: 'from sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\nprint(f"R² on test: {model.score(X_test, y_test):.3f}")',
+    watchout: [
+      'Assumes linear relationships — check residual plots for curvature.',
+      'Sensitive to outliers and multicollinearity.',
+      'Standardise features if you want to compare coefficient magnitudes.'
+    ],
+    docs: 'https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html'
+  },
+  ridge_lasso: {
+    name: 'Ridge / Lasso Regression',
+    sklearnClass: 'sklearn.linear_model.Ridge / Lasso',
+    why: 'When you have many features (especially correlated ones), regularised regression handles them better than plain linear regression. Lasso also does feature selection by zeroing out unimportant coefficients.',
+    code: 'from sklearn.linear_model import Ridge, Lasso\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Pipeline because regularisation requires standardised features\nmodel = Pipeline([(\'scaler\', StandardScaler()), (\'reg\', Ridge(alpha=1.0))])\nmodel.fit(X_train, y_train)',
+    watchout: [
+      'Always standardise features first (the pipeline above does this).',
+      '<code>alpha</code> controls regularisation strength — tune with <code>RidgeCV</code> / <code>LassoCV</code>.',
+      'Use Lasso when you want feature selection; Ridge when you want to keep all features but shrink them.'
+    ],
+    docs: 'https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression'
+  },
+  logreg: {
+    name: 'Logistic Regression',
+    sklearnClass: 'sklearn.linear_model.LogisticRegression',
+    why: 'The baseline for classification — interpretable, fast, gives you well-calibrated probabilities. If a more complex model can\'t beat logistic regression by much, the simpler model is the right answer.',
+    code: 'from sklearn.linear_model import LogisticRegression\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)\n\nmodel = Pipeline([(\'scaler\', StandardScaler()), (\'clf\', LogisticRegression(max_iter=1000, random_state=42))])\nmodel.fit(X_train, y_train)',
+    watchout: [
+      'Standardise features so the regularisation acts uniformly.',
+      'Use <code>stratify=y</code> in train/test split to keep class proportions.',
+      'For imbalanced classes, set <code>class_weight=\'balanced\'</code>.'
+    ],
+    docs: 'https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html'
+  },
+  dtree: {
+    name: 'Decision Tree',
+    sklearnClass: 'sklearn.tree.DecisionTreeClassifier / Regressor',
+    why: 'Single tree — extremely interpretable, you can literally print and read the decision rules. Best as a teaching baseline or when stakeholders need full explainability.',
+    code: 'from sklearn.tree import DecisionTreeClassifier, plot_tree\nfrom sklearn.model_selection import train_test_split\nimport matplotlib.pyplot as plt\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)\n\nmodel = DecisionTreeClassifier(max_depth=4, random_state=42)\nmodel.fit(X_train, y_train)\n\nplot_tree(model, feature_names=X.columns, filled=True, fontsize=8)\nplt.show()',
+    watchout: [
+      'Limit <code>max_depth</code> (try 3–6) — unlimited trees memorise the training data.',
+      'Single trees are unstable — tiny data changes give very different trees. For production, use Random Forest instead.'
+    ],
+    docs: 'https://scikit-learn.org/stable/modules/tree.html'
+  },
+  rf: {
+    name: 'Random Forest',
+    sklearnClass: 'sklearn.ensemble.RandomForestClassifier / Regressor',
+    why: 'The reliable workhorse. Strong out-of-the-box performance, handles non-linearities, robust to outliers, gives feature importances. If you don\'t know what to try, try this.',
+    code: 'from sklearn.ensemble import RandomForestClassifier\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)\n\nmodel = RandomForestClassifier(n_estimators=200, max_depth=None, n_jobs=-1, random_state=42)\nmodel.fit(X_train, y_train)\nprint(f"Test accuracy: {model.score(X_test, y_test):.3f}")',
+    watchout: [
+      '<code>n_estimators=200</code> is a sensible default; more rarely helps once you\'re past 100.',
+      'Built-in feature importance: <code>model.feature_importances_</code>. Useful but watch out — it\'s biased towards high-cardinality features.',
+      'For imbalanced classes, use <code>class_weight=\'balanced\'</code>.'
+    ],
+    docs: 'https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html'
+  },
+  gbm: {
+    name: 'Gradient Boosting (XGBoost / LightGBM)',
+    sklearnClass: 'xgboost.XGBClassifier / lightgbm.LGBMClassifier',
+    why: 'Top-tier predictive performance on tabular data — wins most Kaggle competitions. Slightly harder to tune than Random Forest but usually worth the extra effort once you have ≥ a few thousand rows.',
+    code: '# pip install xgboost\nfrom xgboost import XGBClassifier\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)\n\nmodel = XGBClassifier(n_estimators=200, max_depth=5, learning_rate=0.1, random_state=42, eval_metric=\'logloss\')\nmodel.fit(X_train, y_train)',
+    watchout: [
+      'Three hyperparameters matter most: <code>n_estimators</code>, <code>max_depth</code>, <code>learning_rate</code>. Use early stopping with a validation set.',
+      'On small datasets (&lt; 500), often loses to Random Forest because it overfits.',
+      'LightGBM is faster than XGBoost on large data; CatBoost handles categorical features without one-hot encoding.'
+    ],
+    docs: 'https://xgboost.readthedocs.io/en/stable/python/python_api.html'
+  },
+  svm: {
+    name: 'Support Vector Machine (SVM)',
+    sklearnClass: 'sklearn.svm.SVC / SVR',
+    why: 'Powerful for small-to-medium classification problems with non-linear boundaries. The kernel trick lets it find complex separations.',
+    code: 'from sklearn.svm import SVC\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)\n\nmodel = Pipeline([(\'scaler\', StandardScaler()), (\'svm\', SVC(kernel=\'rbf\', C=1.0, random_state=42))])\nmodel.fit(X_train, y_train)',
+    watchout: [
+      'Always standardise features — SVM is distance-based.',
+      'Slow on large datasets (n &gt; 50k) — switch to a linear SVM (<code>LinearSVC</code>) or use Random Forest.',
+      'Default kernel <code>rbf</code> is a good start; tune <code>C</code> and <code>gamma</code> via <code>GridSearchCV</code>.'
+    ],
+    docs: 'https://scikit-learn.org/stable/modules/svm.html'
+  },
+  knn: {
+    name: 'K-Nearest Neighbours (KNN)',
+    sklearnClass: 'sklearn.neighbors.KNeighborsClassifier / Regressor',
+    why: 'No training step — predictions are made by looking at the K closest training points. Great for small datasets and as a teaching example of how distance-based classification works.',
+    code: 'from sklearn.neighbors import KNeighborsClassifier\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)\n\nmodel = Pipeline([(\'scaler\', StandardScaler()), (\'knn\', KNeighborsClassifier(n_neighbors=5))])\nmodel.fit(X_train, y_train)',
+    watchout: [
+      'Always standardise features.',
+      'Slow at <em>prediction</em> time — every prediction scans the full training set.',
+      'Curse of dimensionality: KNN gets worse as feature count grows. Don\'t use beyond ~20 features without dimensionality reduction first.'
+    ],
+    docs: 'https://scikit-learn.org/stable/modules/neighbors.html'
+  },
+  nb: {
+    name: 'Naive Bayes',
+    sklearnClass: 'sklearn.naive_bayes.GaussianNB / MultinomialNB',
+    why: 'Extremely fast, surprisingly good for high-dimensional sparse data (text classification especially). The "naive" independence assumption is wrong but often doesn\'t matter in practice.',
+    code: 'from sklearn.naive_bayes import GaussianNB\nfrom sklearn.model_selection import train_test_split\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)\n\nmodel = GaussianNB()\nmodel.fit(X_train, y_train)\n# For text features (bag-of-words / TF-IDF), use MultinomialNB instead.',
+    watchout: [
+      'Use <code>GaussianNB</code> for continuous features, <code>MultinomialNB</code> for word counts, <code>BernoulliNB</code> for binary features.',
+      'Probability estimates are poorly calibrated — wrap in <code>CalibratedClassifierCV</code> if you need them.'
+    ],
+    docs: 'https://scikit-learn.org/stable/modules/naive_bayes.html'
+  },
+  kmeans: {
+    name: 'K-Means Clustering',
+    sklearnClass: 'sklearn.cluster.KMeans',
+    why: 'The default unsupervised algorithm for finding K groups in your data. Fast, simple, and works well when clusters are roughly spherical and similar-sized.',
+    code: 'from sklearn.cluster import KMeans\nfrom sklearn.preprocessing import StandardScaler\n\nX_scaled = StandardScaler().fit_transform(X)\n\nmodel = KMeans(n_clusters=3, n_init=10, random_state=42)\nlabels = model.fit_predict(X_scaled)',
+    watchout: [
+      'Standardise features — K-Means uses Euclidean distance.',
+      'You must choose K in advance. Use the elbow method or silhouette score to pick.',
+      'Assumes spherical, similar-sized clusters. Fails on density-varying or oddly-shaped clusters — use DBSCAN or Gaussian Mixture instead.'
+    ],
+    docs: 'https://scikit-learn.org/stable/modules/clustering.html#k-means'
+  },
+  dbscan: {
+    name: 'DBSCAN',
+    sklearnClass: 'sklearn.cluster.DBSCAN',
+    why: 'Density-based clustering — finds arbitrarily-shaped clusters and identifies outliers as noise. Use when you don\'t know how many clusters there should be.',
+    code: 'from sklearn.cluster import DBSCAN\nfrom sklearn.preprocessing import StandardScaler\n\nX_scaled = StandardScaler().fit_transform(X)\n\nmodel = DBSCAN(eps=0.5, min_samples=5)\nlabels = model.fit_predict(X_scaled)\n# Points with label -1 are flagged as noise.',
+    watchout: [
+      '<code>eps</code> (max distance for "neighbour") is the critical parameter. Use a k-distance plot to choose it.',
+      'Doesn\'t scale well to large or high-dimensional data — try HDBSCAN for those cases.'
+    ],
+    docs: 'https://scikit-learn.org/stable/modules/clustering.html#dbscan'
+  },
+  pca: {
+    name: 'PCA (Principal Component Analysis)',
+    sklearnClass: 'sklearn.decomposition.PCA',
+    why: 'Reduce many correlated numeric features to a few orthogonal components that capture most of the variance. The standard exploratory dimensionality reduction technique.',
+    code: 'from sklearn.decomposition import PCA\nfrom sklearn.preprocessing import StandardScaler\n\nX_scaled = StandardScaler().fit_transform(X)\n\npca = PCA(n_components=2)  # Or use n_components=0.95 to keep 95% variance\nX_pca = pca.fit_transform(X_scaled)\nprint(f"Variance explained: {pca.explained_variance_ratio_}")',
+    watchout: [
+      'Always standardise first — PCA is variance-maximising and scale-sensitive.',
+      'Components are linear combinations of features and often hard to interpret directly.',
+      'For visualisation only, t-SNE or UMAP often produce more readable 2D plots — but they\'re not invertible and shouldn\'t be used as features.'
+    ],
+    docs: 'https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html'
+  },
+  arima: {
+    name: 'ARIMA / SARIMA',
+    sklearnClass: 'statsmodels.tsa.arima.model.ARIMA',
+    why: 'The classical time series model. Strong baseline for univariate forecasting with clear trend and/or seasonality. Most introductory time series courses teach this.',
+    code: 'import statsmodels.api as sm\n\n# (p, d, q) for ARIMA; add seasonal_order for SARIMA\nmodel = sm.tsa.ARIMA(y_train, order=(1, 1, 1), seasonal_order=(1, 1, 1, 12))\nresults = model.fit()\nforecast = results.forecast(steps=12)',
+    watchout: [
+      'Series should be stationary (or made so by differencing — the <code>d</code> parameter).',
+      'Choose <code>(p, d, q)</code> using ACF/PACF plots; <code>auto_arima</code> from <code>pmdarima</code> can search for you.',
+      'SARIMA needs you to know the seasonal period upfront.'
+    ],
+    docs: 'https://www.statsmodels.org/stable/generated/statsmodels.tsa.arima.model.ARIMA.html'
+  },
+  prophet: {
+    name: 'Prophet',
+    sklearnClass: 'prophet.Prophet',
+    why: 'Facebook\'s forecasting tool — designed for business time series with strong seasonality, holidays, and trend changes. Less mathematical fuss than ARIMA, easier for students to apply.',
+    code: '# pip install prophet\nfrom prophet import Prophet\n\n# Prophet expects columns named exactly \'ds\' (date) and \'y\' (value)\ndf_prophet = df.rename(columns={\'date\': \'ds\', \'value\': \'y\'})\n\nmodel = Prophet(yearly_seasonality=True, weekly_seasonality=True)\nmodel.fit(df_prophet)\n\nfuture = model.make_future_dataframe(periods=90)\nforecast = model.predict(future)\nmodel.plot(forecast)',
+    watchout: [
+      'Designed for business time series — sub-daily and high-frequency data are not its strength.',
+      'Heavy install (depends on Stan). Often easier to install on Linux/Mac than Windows.',
+      'Don\'t use Prophet just because it\'s easy — for short series, a simpler ARIMA may be more appropriate.'
+    ],
+    docs: 'https://facebook.github.io/prophet/docs/quick_start.html'
+  },
+  ts_features_rf: {
+    name: 'Feature engineering + Random Forest',
+    sklearnClass: 'sklearn.ensemble.RandomForestRegressor',
+    why: 'A pragmatic alternative to ARIMA / Prophet: extract lag features, rolling means, day-of-week, etc., then use a standard regression model. Often the most accurate approach for student projects with multiple regressors.',
+    code: 'import pandas as pd\nfrom sklearn.ensemble import RandomForestRegressor\n\n# Build lag and rolling features\ndf[\'lag_1\']    = df[\'value\'].shift(1)\ndf[\'lag_7\']    = df[\'value\'].shift(7)\ndf[\'rolling7\'] = df[\'value\'].rolling(7).mean().shift(1)\ndf[\'dow\']      = df.index.dayofweek\ndf[\'month\']    = df.index.month\n\ndf = df.dropna()\nX = df[[\'lag_1\', \'lag_7\', \'rolling7\', \'dow\', \'month\']]\ny = df[\'value\']\n\n# Time-based split — never random for time series\nsplit = int(len(df) * 0.8)\nmodel = RandomForestRegressor(n_estimators=200, random_state=42)\nmodel.fit(X[:split], y[:split])',
+    watchout: [
+      'Never use random train/test split for time series — always split chronologically.',
+      'Use <code>TimeSeriesSplit</code> for cross-validation.',
+      'Beware of data leakage — lag features must use only past values.'
+    ],
+    docs: 'https://scikit-learn.org/stable/modules/cross_validation.html#time-series-split'
+  }
+};
+
+// ────────────────────────────────────────────────────────────────
+// PICK A METRIC — 11 metrics
+// ────────────────────────────────────────────────────────────────
+var DS_METRICS = {
+  mae: {
+    name: 'MAE — Mean Absolute Error',
+    sklearnFn: 'sklearn.metrics.mean_absolute_error',
+    why: 'Average size of errors, in the same units as your target. Easy to explain to non-technical audiences and robust to outliers.',
+    interpretation: 'Lower is better. An MAE of 3.2 on house prices in £k means predictions are off by £3,200 on average. Compare against a baseline (e.g. predicting the mean) to know if your model adds value.',
+    code: 'from sklearn.metrics import mean_absolute_error\nmae = mean_absolute_error(y_test, y_pred)',
+    docs: 'https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_absolute_error.html'
+  },
+  rmse: {
+    name: 'RMSE — Root Mean Squared Error',
+    sklearnFn: 'sklearn.metrics.mean_squared_error (with squared=False)',
+    why: 'Like MAE but squares errors before averaging — penalises large errors much more heavily. Standard in ML benchmarks.',
+    interpretation: 'Lower is better, in the same units as the target. RMSE ≥ MAE always; a big gap between them suggests a few large errors are doing the damage. Worth reporting both.',
+    code: 'from sklearn.metrics import mean_squared_error\nrmse = mean_squared_error(y_test, y_pred, squared=False)\n# In sklearn ≥1.4: from sklearn.metrics import root_mean_squared_error',
+    docs: 'https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html'
+  },
+  r2: {
+    name: 'R² — Coefficient of Determination',
+    sklearnFn: 'sklearn.metrics.r2_score',
+    why: 'The proportion of variance in the target explained by your model. Useful as an overall fit quality summary.',
+    interpretation: '1.0 = perfect fit. 0.0 = no better than predicting the mean. Negative = worse than the mean. R² of 0.7 ≈ "the model captures 70% of the variation."',
+    code: 'from sklearn.metrics import r2_score\nr2 = r2_score(y_test, y_pred)',
+    docs: 'https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html'
+  },
+  mape: {
+    name: 'MAPE — Mean Absolute Percentage Error',
+    sklearnFn: 'sklearn.metrics.mean_absolute_percentage_error',
+    why: 'Errors expressed as a percentage of actual values. Useful when you want to know "on average how wrong (in %) is the model?".',
+    interpretation: 'Lower is better. MAPE of 8% means predictions are off by 8% of the true value on average. Good for forecasting / business contexts.',
+    code: 'from sklearn.metrics import mean_absolute_percentage_error\nmape = mean_absolute_percentage_error(y_test, y_pred)',
+    docs: 'https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_absolute_percentage_error.html'
+  },
+  mase: {
+    name: 'MASE — Mean Absolute Scaled Error',
+    sklearnFn: 'manual computation (no sklearn shortcut)',
+    why: 'Specifically for time series. Compares your model\'s MAE to a naive baseline (the previous-period prediction). Survives seasonality and zero values where MAPE breaks.',
+    interpretation: 'MASE &lt; 1 → your model beats the naive baseline. MASE = 1 → no better than naive. MASE &gt; 1 → worse than just predicting last period\'s value.',
+    code: 'import numpy as np\n\ndef mase(y_true, y_pred, y_train, season=1):\n    naive_mae = np.mean(np.abs(np.diff(y_train, n=season)))\n    return np.mean(np.abs(y_true - y_pred)) / naive_mae\n\nscore = mase(y_test, y_pred, y_train, season=12)  # season=12 for monthly',
+    docs: 'https://otexts.com/fpp3/accuracy.html#scaled-errors'
+  },
+  accuracy: {
+    name: 'Accuracy',
+    sklearnFn: 'sklearn.metrics.accuracy_score',
+    why: 'Fraction of predictions that are correct. The most intuitive classification metric — but only meaningful when your classes are roughly balanced.',
+    interpretation: '0.85 = 85% correct. With balanced classes, 50% (binary) or 1/K (multi-class) is the chance baseline. Always compare against this.',
+    code: 'from sklearn.metrics import accuracy_score\nacc = accuracy_score(y_test, y_pred)',
+    docs: 'https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html'
+  },
+  f1: {
+    name: 'F1 Score',
+    sklearnFn: 'sklearn.metrics.f1_score',
+    why: 'The harmonic mean of precision and recall. The standard "single number" for imbalanced classification when both false positives and false negatives matter.',
+    interpretation: '1.0 = perfect, 0.0 = terrible. For multi-class, use <code>average=\'macro\'</code> (treats classes equally) or <code>\'weighted\'</code> (weights by class size).',
+    code: 'from sklearn.metrics import f1_score\nf1 = f1_score(y_test, y_pred, average=\'binary\')  # or \'macro\' / \'weighted\' for multi-class',
+    docs: 'https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html'
+  },
+  precision_recall: {
+    name: 'Precision & Recall (separately)',
+    sklearnFn: 'sklearn.metrics.precision_score / recall_score',
+    why: 'When false positives and false negatives have very different costs (e.g. medical screening vs spam filter), report both rather than collapsing to F1.',
+    interpretation: 'Precision = "of those I flagged positive, how many actually were?" Recall = "of all true positives, how many did I catch?" High precision + low recall = picky model. High recall + low precision = liberal model.',
+    code: 'from sklearn.metrics import precision_score, recall_score, classification_report\n\nprint(f"Precision: {precision_score(y_test, y_pred):.3f}")\nprint(f"Recall:    {recall_score(y_test, y_pred):.3f}")\nprint(classification_report(y_test, y_pred))',
+    docs: 'https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-and-f-measures'
+  },
+  roc_auc: {
+    name: 'ROC AUC',
+    sklearnFn: 'sklearn.metrics.roc_auc_score',
+    why: 'Measures how well your model ranks positives above negatives, across all possible classification thresholds. Independent of the threshold you finally pick.',
+    interpretation: '1.0 = perfect ranking. 0.5 = random (no skill). 0.7+ usually considered useful, 0.8+ strong, 0.9+ excellent. Misleading on heavily imbalanced data — use PR AUC instead.',
+    code: 'from sklearn.metrics import roc_auc_score\n\n# Pass probabilities, not labels\ny_proba = model.predict_proba(X_test)[:, 1]\nauc = roc_auc_score(y_test, y_proba)',
+    docs: 'https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html'
+  },
+  pr_auc: {
+    name: 'PR AUC (Average Precision)',
+    sklearnFn: 'sklearn.metrics.average_precision_score',
+    why: 'Like ROC AUC but focuses only on the positive class. The right summary for heavily imbalanced classification (e.g. fraud detection, rare disease diagnosis).',
+    interpretation: 'Higher is better, max 1.0. Unlike ROC AUC, the baseline depends on class balance — for a 5% positive class, random scoring gives PR AUC ≈ 0.05.',
+    code: 'from sklearn.metrics import average_precision_score\n\ny_proba = model.predict_proba(X_test)[:, 1]\nap = average_precision_score(y_test, y_proba)',
+    docs: 'https://scikit-learn.org/stable/modules/generated/sklearn.metrics.average_precision_score.html'
+  },
+  confusion: {
+    name: 'Confusion Matrix (always)',
+    sklearnFn: 'sklearn.metrics.confusion_matrix',
+    why: 'Not a single metric but a complete breakdown — for any classification problem, look at the confusion matrix alongside whatever summary metric you choose. It tells you <em>which</em> errors the model makes.',
+    interpretation: 'Rows = true labels, columns = predicted labels. Diagonal = correct predictions. Off-diagonal = errors. Always look at this — summary metrics can hide important asymmetries.',
+    code: 'from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay\nimport matplotlib.pyplot as plt\n\ncm = confusion_matrix(y_test, y_pred)\ndisp = ConfusionMatrixDisplay(cm, display_labels=model.classes_)\ndisp.plot(cmap=\'Blues\')\nplt.show()',
+    docs: 'https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html'
+  }
+};
+
+
+// ────────────────────────────────────────────────────────────────
+// DATA SCIENCE — wizard questions per sub-flow
+// ────────────────────────────────────────────────────────────────
+var DS_FLOWS = {
+  chart: {
+    label: 'Pick a Chart',
+    desc: 'Show me how to visualise this data',
+    questions: [
+      { id:'goal', q:'What\'s your goal?',
+        help:'Pick the closest match. We\'ll use this to decide which chart family makes sense.',
+        options:[
+          {val:'distribution', label:'Look at one variable\'s distribution',  desc:'Where do values cluster? How spread out?'},
+          {val:'compare',      label:'Compare a variable across groups',       desc:'Does X differ between conditions / categories?'},
+          {val:'relation',     label:'Show relationship between two variables', desc:'Does X go up with Y?'},
+          {val:'time',         label:'Show change over time',                   desc:'Trends, seasonality, time-series exploration'},
+          {val:'composition',  label:'Show parts of a whole',                   desc:'How do segments add up?'},
+          {val:'many',         label:'Explore many variables at once',          desc:'Lots of features, want overview'}
+        ]
+      },
+      { id:'var_dist_type', q:'Is your variable numeric or categorical?',
+        options:[
+          {val:'numeric', label:'Numeric (continuous values)'},
+          {val:'categorical', label:'Categorical (groups, labels)'}
+        ],
+        showIf:function(a){return a.goal==='distribution';}
+      },
+      { id:'sample_size_dist', q:'Roughly how many data points?',
+        options:[
+          {val:'small',  label:'Small (n &lt; 50)'},
+          {val:'medium', label:'Medium (50 to a few hundred)'},
+          {val:'large',  label:'Large (1,000+)'}
+        ],
+        showIf:function(a){return a.goal==='distribution' && a.var_dist_type==='numeric';}
+      },
+      { id:'compare_n_groups', q:'How many groups are you comparing?',
+        options:[
+          {val:'2', label:'2 groups'},
+          {val:'3plus', label:'3 or more groups'},
+          {val:'many', label:'Many (5+)'}
+        ],
+        showIf:function(a){return a.goal==='compare';}
+      },
+      { id:'compare_size', q:'Roughly how many points <em>per group</em>?',
+        options:[
+          {val:'small', label:'Small (&lt; 30 per group)'},
+          {val:'medium', label:'Medium (30+)'},
+          {val:'large', label:'Large (200+)'}
+        ],
+        showIf:function(a){return a.goal==='compare';}
+      },
+      { id:'relation_types', q:'What types are the two variables?',
+        options:[
+          {val:'numeric_numeric',     label:'Both numeric'},
+          {val:'numeric_categorical', label:'One numeric, one categorical'},
+          {val:'categorical_categorical', label:'Both categorical'}
+        ],
+        showIf:function(a){return a.goal==='relation';}
+      },
+      { id:'relation_third_var', q:'Want to add a third variable (e.g. colour by group)?',
+        options:[
+          {val:'no',  label:'No, just the two'},
+          {val:'yes_cat', label:'Yes — colour by a category'}
+        ],
+        showIf:function(a){return a.goal==='relation' && a.relation_types==='numeric_numeric';}
+      },
+      { id:'time_kind', q:'What kind of time-series view?',
+        help:'For exploration use a line plot. For diagnostics like trend / seasonality, use a decomposition or autocorrelation plot.',
+        options:[
+          {val:'simple',       label:'Just plot the values over time'},
+          {val:'multi_series', label:'Multiple series (e.g. participants × time) with uncertainty band'},
+          {val:'decompose',    label:'Decompose into trend / seasonal / residual'},
+          {val:'autocorr',     label:'Look at autocorrelation (for ARIMA modelling)'}
+        ],
+        showIf:function(a){return a.goal==='time';}
+      },
+      { id:'composition_n', q:'How many segments make up the whole?',
+        options:[
+          {val:'few', label:'Few (2–4)'},
+          {val:'many', label:'Several (5+)'}
+        ],
+        showIf:function(a){return a.goal==='composition';}
+      },
+      { id:'composition_dim', q:'Just one whole, or composition across groups / time?',
+        options:[
+          {val:'one', label:'Just one whole'},
+          {val:'across', label:'Across groups or time'}
+        ],
+        showIf:function(a){return a.goal==='composition';}
+      },
+      { id:'many_count', q:'How many variables roughly?',
+        options:[
+          {val:'few', label:'3 to 5'},
+          {val:'many', label:'6 or more'}
+        ],
+        showIf:function(a){return a.goal==='many';}
+      }
+    ],
+    decide: function(a) {
+      var path = [];
+      var p = function(q, ans){ path.push({q:q, a:ans}); };
+
+      if (a.goal === 'distribution') {
+        p('Goal','Look at one variable\'s distribution');
+        if (a.var_dist_type === 'categorical') { p('Variable type','Categorical'); return {key:'bar_count', path:path}; }
+        p('Variable type','Numeric');
+        if (a.sample_size_dist === 'small') { p('Sample size','Small (&lt; 50)'); return {key:'ecdf', path:path}; }
+        p('Sample size', a.sample_size_dist === 'large' ? 'Large' : 'Medium');
+        return {key:'histogram', path:path};
+      }
+
+      if (a.goal === 'compare') {
+        p('Goal','Compare across groups');
+        p('Group count', a.compare_n_groups === '2' ? '2 groups' : (a.compare_n_groups === '3plus' ? '3+ groups' : 'Many (5+)'));
+        if (a.compare_n_groups === 'many') { p('Approach','Many distributions to compare'); return {key:'ridge', path:path}; }
+        p('Sample size per group', a.compare_size);
+        if (a.compare_size === 'small') return {key:'strip_swarm', path:path};
+        if (a.compare_size === 'large') return {key:'violin', path:path};
+        return {key:'boxplot', path:path};
+      }
+
+      if (a.goal === 'relation') {
+        p('Goal','Relationship between variables');
+        if (a.relation_types === 'categorical_categorical') {
+          p('Variable types','Both categorical'); return {key:'bar_grouped', path:path};
+        }
+        if (a.relation_types === 'numeric_categorical') {
+          p('Variable types','Numeric × categorical'); return {key:'boxplot', path:path};
+        }
+        p('Variable types','Both numeric');
+        if (a.relation_third_var === 'yes_cat') { p('Add a colour group','Yes'); return {key:'scatter_with_hue', path:path}; }
+        return {key:'scatter', path:path};
+      }
+
+      if (a.goal === 'time') {
+        p('Goal','Change over time');
+        if (a.time_kind === 'decompose')    return {key:'seasonal_decompose', path:path};
+        if (a.time_kind === 'autocorr')     return {key:'acf_plot', path:path};
+        if (a.time_kind === 'multi_series') return {key:'lineplot_with_band', path:path};
+        return {key:'lineplot', path:path};
+      }
+
+      if (a.goal === 'composition') {
+        p('Goal','Parts of a whole');
+        if (a.composition_dim === 'across') { p('Dimension','Across groups or time'); return {key:'stacked_bar', path:path}; }
+        p('Dimension','Just one whole');
+        if (a.composition_n === 'few')  return {key:'pie', path:path};   // grudgingly
+        return {key:'bar_count', path:path};                              // for many segments, bars beat pies
+      }
+
+      if (a.goal === 'many') {
+        p('Goal','Explore many variables');
+        if (a.many_count === 'few') return {key:'pairplot', path:path};
+        return {key:'heatmap_corr', path:path};
+      }
+      return {key:'histogram', path:path};
+    }
+  },
+
+  model: {
+    label: 'Pick a Model',
+    desc: 'Suggest a model to start with',
+    questions: [
+      { id:'task', q:'What\'s the task?',
+        options:[
+          {val:'regression',     label:'Predict a number',              desc:'House price, exam score, sales'},
+          {val:'classification', label:'Predict a category',            desc:'Pass/fail, type-of-X, spam/not'},
+          {val:'clustering',     label:'Find groups (no labels)',       desc:'Unsupervised — segment customers, group records'},
+          {val:'dim_reduce',     label:'Reduce dimensions / explore',   desc:'Many features, want a simpler view'},
+          {val:'time_series',    label:'Forecast a time series',        desc:'Predict future values from past'}
+        ]
+      },
+      { id:'data_size', q:'Roughly how much data?',
+        options:[
+          {val:'small',  label:'Small (&lt; 500 rows)'},
+          {val:'medium', label:'Medium (500 – 50,000)'},
+          {val:'large',  label:'Large (50,000+)'}
+        ],
+        showIf:function(a){return a.task==='regression' || a.task==='classification';}
+      },
+      { id:'interpret', q:'Does interpretability matter?',
+        help:'If a non-technical stakeholder needs to understand <em>why</em> the model made each prediction, you need an interpretable model.',
+        options:[
+          {val:'yes', label:'Yes — I need to explain the model',        desc:'Linear/logistic, decision tree'},
+          {val:'no',  label:'No — I just want best predictions',         desc:'Random Forest, gradient boosting'}
+        ],
+        showIf:function(a){return a.task==='regression' || a.task==='classification';}
+      },
+      { id:'n_features', q:'Roughly how many features (columns)?',
+        options:[
+          {val:'few',  label:'Few (under 10)'},
+          {val:'many', label:'Many (10 – 100)'},
+          {val:'huge', label:'Lots (hundreds or more)'}
+        ],
+        showIf:function(a){return a.task==='regression' || a.task==='classification';}
+      },
+      { id:'cls_imbalance', q:'Are your classes balanced?',
+        options:[
+          {val:'balanced',  label:'Roughly balanced'},
+          {val:'imbalanced', label:'Imbalanced (one class &gt; 4× the other)'},
+          {val:'dk', label:'Don\'t know'}
+        ],
+        showIf:function(a){return a.task==='classification';}
+      },
+      { id:'cluster_known', q:'Do you know how many clusters to look for?',
+        options:[
+          {val:'yes', label:'Yes, I know K'},
+          {val:'no',  label:'No, the algorithm should figure it out'}
+        ],
+        showIf:function(a){return a.task==='clustering';}
+      },
+      { id:'ts_kind', q:'What sort of time series problem?',
+        options:[
+          {val:'classical', label:'Univariate, want clean stat-model output', desc:'ARIMA / SARIMA territory'},
+          {val:'business',  label:'Daily / weekly business series with seasonality',     desc:'Prophet is friendly here'},
+          {val:'features',  label:'I have other regressors / many series',          desc:'Feature-engineer + Random Forest'}
+        ],
+        showIf:function(a){return a.task==='time_series';}
+      }
+    ],
+    decide: function(a) {
+      var path = [];
+      var p = function(q, ans){ path.push({q:q, a:ans}); };
+
+      if (a.task === 'clustering') {
+        p('Task','Clustering');
+        if (a.cluster_known === 'yes') { p('K known','Yes'); return {primary:'kmeans', runner:'dbscan', path:path}; }
+        p('K known','No'); return {primary:'dbscan', runner:'kmeans', path:path};
+      }
+
+      if (a.task === 'dim_reduce') {
+        p('Task','Dimensionality reduction');
+        return {primary:'pca', runner:null, path:path};
+      }
+
+      if (a.task === 'time_series') {
+        p('Task','Time-series forecasting');
+        if (a.ts_kind === 'business')  { p('Kind','Business / seasonal');  return {primary:'prophet',        runner:'arima',          path:path}; }
+        if (a.ts_kind === 'features')  { p('Kind','With regressors');      return {primary:'ts_features_rf', runner:'arima',          path:path}; }
+        p('Kind','Classical univariate'); return {primary:'arima', runner:'ts_features_rf', path:path};
+      }
+
+      if (a.task === 'regression') {
+        p('Task','Regression');
+        p('Data size', a.data_size); p('Interpretability', a.interpret); p('Features', a.n_features);
+        if (a.interpret === 'yes') {
+          if (a.n_features === 'huge' || a.n_features === 'many') return {primary:'ridge_lasso', runner:'linreg', path:path};
+          return {primary:'linreg', runner:'rf', path:path};
+        }
+        // Best-prediction
+        if (a.data_size === 'small') return {primary:'rf', runner:'linreg', path:path};
+        return {primary:'gbm', runner:'rf', path:path};
+      }
+
+      if (a.task === 'classification') {
+        p('Task','Classification');
+        p('Data size', a.data_size); p('Interpretability', a.interpret);
+        p('Features', a.n_features); p('Class balance', a.cls_imbalance);
+        if (a.interpret === 'yes') {
+          if (a.data_size === 'small' && a.n_features === 'few') return {primary:'dtree', runner:'logreg', path:path};
+          return {primary:'logreg', runner:'rf', path:path};
+        }
+        if (a.data_size === 'small') {
+          if (a.n_features === 'huge') return {primary:'nb', runner:'logreg', path:path};
+          if (a.n_features === 'few')  return {primary:'rf', runner:'svm',    path:path};
+          return {primary:'rf', runner:'logreg', path:path};
+        }
+        // Medium / large + best-prediction
+        if (a.n_features === 'huge') return {primary:'gbm', runner:'logreg', path:path};
+        return {primary:'gbm', runner:'rf', path:path};
+      }
+      return {primary:'rf', runner:'logreg', path:path};
+    }
+  },
+
+  metric: {
+    label: 'Pick a Metric',
+    desc: 'Recommend an evaluation metric',
+    questions: [
+      { id:'problem', q:'What kind of problem are you evaluating?',
+        options:[
+          {val:'regression',  label:'Regression (predicting a number)'},
+          {val:'binary',      label:'Binary classification (yes/no)'},
+          {val:'multiclass',  label:'Multi-class classification (3+ classes)'},
+          {val:'time_series', label:'Time series forecasting'}
+        ]
+      },
+      { id:'reg_focus', q:'What matters most for your regression?',
+        options:[
+          {val:'units',     label:'Errors in same units as the target',      desc:'MAE — easy to communicate'},
+          {val:'big_errors', label:'Penalising large errors heavily',         desc:'RMSE — squares errors'},
+          {val:'fit',       label:'Overall fit / variance explained',         desc:'R² — single summary'},
+          {val:'percentage', label:'Errors as a % of actual values',          desc:'MAPE — best for forecasting / costs'}
+        ],
+        showIf:function(a){return a.problem==='regression';}
+      },
+      { id:'cls_imb_metric', q:'Are your classes balanced?',
+        options:[
+          {val:'balanced',  label:'Roughly balanced'},
+          {val:'imbalanced', label:'Imbalanced'}
+        ],
+        showIf:function(a){return a.problem==='binary' || a.problem==='multiclass';}
+      },
+      { id:'cls_focus', q:'What do you care about most?',
+        options:[
+          {val:'overall',   label:'Overall correctness',                                desc:'Accuracy or F1'},
+          {val:'positives', label:'Catching all positives (recall)',                     desc:'High recall, may sacrifice precision'},
+          {val:'avoid_fp',  label:'Avoiding false alarms (precision)',                   desc:'High precision, may miss some positives'},
+          {val:'ranking',   label:'Ranking quality (probabilities)',                     desc:'ROC AUC or PR AUC'}
+        ],
+        showIf:function(a){return a.problem==='binary' || a.problem==='multiclass';}
+      }
+    ],
+    decide: function(a) {
+      var path = [];
+      var p = function(q, ans){ path.push({q:q, a:ans}); };
+
+      if (a.problem === 'regression') {
+        p('Problem','Regression'); p('Focus', a.reg_focus);
+        if (a.reg_focus === 'units')      return {primary:'mae',  also:'rmse', path:path};
+        if (a.reg_focus === 'big_errors') return {primary:'rmse', also:'mae',  path:path};
+        if (a.reg_focus === 'fit')        return {primary:'r2',   also:'rmse', path:path};
+        return {primary:'mape', also:'mae', path:path};
+      }
+      if (a.problem === 'time_series') {
+        p('Problem','Time-series forecasting');
+        return {primary:'mase', also:'rmse', path:path};
+      }
+      // Classification
+      p('Problem', a.problem === 'binary' ? 'Binary classification' : 'Multi-class classification');
+      p('Class balance', a.cls_imb_metric);
+      p('Focus', a.cls_focus);
+      if (a.cls_focus === 'ranking') {
+        if (a.cls_imb_metric === 'imbalanced') return {primary:'pr_auc', also:'confusion', path:path};
+        return {primary:'roc_auc', also:'confusion', path:path};
+      }
+      if (a.cls_focus === 'positives' || a.cls_focus === 'avoid_fp') {
+        return {primary:'precision_recall', also:'confusion', path:path};
+      }
+      // overall
+      if (a.cls_imb_metric === 'balanced') return {primary:'accuracy', also:'confusion', path:path};
+      return {primary:'f1', also:'confusion', path:path};
+    }
+  }
+};
+
+
+
+// ────────────────────────────────────────────────────────────────
+// DATA SCIENCE — wizard state and render functions
+// ────────────────────────────────────────────────────────────────
+var dsState = {
+  flow: null,        // 'chart' | 'model' | 'metric' | null (chooser visible)
+  answers: {}        // qid → value
+};
+
+function dsVisibleQs(flow, answers) {
+  return DS_FLOWS[flow].questions.filter(function(q){
+    return !q.showIf || q.showIf(answers);
+  });
+}
+
+function dsShowChooser() {
+  dsState.flow = null;
+  dsState.answers = {};
+  document.getElementById('ds-chooser').style.display = '';
+  document.getElementById('ds-wiz').style.display = 'none';
+  document.getElementById('ds-result').style.display = 'none';
+}
+
+function dsStartFlow(flowKey) {
+  dsState.flow = flowKey;
+  dsState.answers = {};
+  document.getElementById('ds-chooser').style.display = 'none';
+  document.getElementById('ds-wiz').style.display = '';
+  document.getElementById('ds-result').style.display = 'none';
+  document.getElementById('ds-wiz-flow-label').textContent = DS_FLOWS[flowKey].label;
+  document.getElementById('ds-result-counter').textContent = DS_FLOWS[flowKey].label.replace('Pick ','') + ' recommendation';
+  dsRenderWiz();
+  track('ds/' + flowKey + '/start', 'DS flow started: ' + flowKey);
+}
+
+function dsRenderWiz() {
+  var flow = dsState.flow;
+  if (!flow) return;
+  var visible = dsVisibleQs(flow, dsState.answers);
+  var currentIdx = -1;
+  for (var i = 0; i < visible.length; i++) {
+    if (dsState.answers[visible[i].id] === undefined) { currentIdx = i; break; }
+  }
+  if (currentIdx === -1) { dsShowResult(); return; }
+
+  var total = visible.length;
+  var pct = Math.round((currentIdx / total) * 100);
+  document.getElementById('ds-prog-label').textContent = 'Question ' + (currentIdx + 1) + ' of ' + total;
+  document.getElementById('ds-prog-pct').textContent = pct + '%';
+  document.getElementById('ds-prog-fill').style.width = pct + '%';
+
+  var q = visible[currentIdx];
+  var optsHTML = q.options.map(function(opt) {
+    var isSel = dsState.answers[q.id] === opt.val;
+    return '<button type="button" class="sp-wiz-option ' + (isSel ? 'selected' : '') + '" ' +
+             'data-dsq="' + q.id + '" data-dsv="' + escHTML(opt.val) + '" ' +
+             'aria-pressed="' + (isSel ? 'true' : 'false') + '">' +
+             '<div class="sp-wiz-radio" aria-hidden="true"></div>' +
+             '<div class="sp-wiz-option-label">' + opt.label +
+             (opt.desc ? '<div class="sp-wiz-option-desc">' + opt.desc + '</div>' : '') +
+             '</div>' +
+           '</button>';
+  }).join('');
+
+  document.getElementById('ds-wiz-body').innerHTML =
+    '<div class="sp-wiz-card" role="form" aria-label="Question ' + (currentIdx + 1) + '">' +
+      '<div class="sp-wiz-q-num">Question ' + (currentIdx + 1) + '</div>' +
+      '<div class="sp-wiz-q-text">' + escHTML(q.q) + '</div>' +
+      (q.help ? '<div class="sp-wiz-q-help">' + q.help + '</div>' : '') +
+      '<div class="sp-wiz-options" role="group">' + optsHTML + '</div>' +
+      '<div class="sp-wiz-nav">' +
+        '<button type="button" class="sp-wiz-back" data-dsaction="back" ' + (currentIdx === 0 ? 'disabled' : '') + '>← Back</button>' +
+      '</div>' +
+    '</div>';
+}
+
+function dsAnswer(qid, val) {
+  // Clear all subsequent answers when a previous one changes
+  var visible = dsVisibleQs(dsState.flow, dsState.answers);
+  var idx = -1;
+  for (var i = 0; i < visible.length; i++) if (visible[i].id === qid) { idx = i; break; }
+  if (idx >= 0) visible.slice(idx + 1).forEach(function(q) { delete dsState.answers[q.id]; });
+  dsState.answers[qid] = val;
+  setTimeout(dsRenderWiz, 200);
+}
+
+function dsBack() {
+  var visible = dsVisibleQs(dsState.flow, dsState.answers);
+  var firstUnanswered = -1;
+  for (var i = 0; i < visible.length; i++) if (dsState.answers[visible[i].id] === undefined) { firstUnanswered = i; break; }
+  var prevIdx = firstUnanswered > 0 ? firstUnanswered - 1 : visible.length - 1;
+  if (prevIdx >= 0) delete dsState.answers[visible[prevIdx].id];
+  dsRenderWiz();
+}
+
+function dsBackFromResult() {
+  document.getElementById('ds-result').style.display = 'none';
+  document.getElementById('ds-wiz').style.display = '';
+  var visible = dsVisibleQs(dsState.flow, dsState.answers);
+  if (visible.length > 0) delete dsState.answers[visible[visible.length - 1].id];
+  dsRenderWiz();
+}
+
+function dsShowResult() {
+  document.getElementById('ds-wiz').style.display = 'none';
+  document.getElementById('ds-result').style.display = '';
+  var dec = DS_FLOWS[dsState.flow].decide(dsState.answers);
+  var html = '';
+  if (dsState.flow === 'chart') html = dsRenderChart(dec);
+  else if (dsState.flow === 'model') html = dsRenderModel(dec);
+  else html = dsRenderMetric(dec);
+  document.getElementById('ds-result-card').innerHTML = html;
+  track('ds/' + dsState.flow + '/result/' + (dec.key || dec.primary), 'DS result: ' + (dec.key || dec.primary));
+}
+
+// Helper: render a code block with copy button
+function dsCodeBlock(code, langLabel) {
+  var safeCode = escHTML(code);
+  return '<div class="ds-code-wrap">' +
+           '<div class="ds-code-head">' +
+             '<span>' + (langLabel || 'Python') + '</span>' +
+             '<button type="button" class="ds-code-copy" data-dscopy="' + escHTML(code) + '">' +
+               '<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">' +
+                 '<rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1"/>' +
+               '</svg>' +
+               '<span class="ds-code-copy-label">Copy</span>' +
+             '</button>' +
+           '</div>' +
+           '<pre class="ds-code-block">' + safeCode + '</pre>' +
+         '</div>';
+}
+
+function dsDocsLink(url) {
+  if (!url) return '';
+  return '<a class="ds-docs-link" href="' + url + '" target="_blank" rel="noopener">' +
+           '<svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 1H2a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1v-3"/><path d="M11 1h4v4M15 1L7 9"/></svg>' +
+           'Read the docs' +
+         '</a>';
+}
+
+function dsRenderChart(dec) {
+  var c = DS_CHARTS[dec.key];
+  if (!c) return '<p>No chart found.</p>';
+  var pitfalls = c.pitfalls.map(function(x){return '<li>'+x+'</li>';}).join('');
+  return '<section class="ds-result-card">' +
+           '<div class="ds-result-header">' +
+             '<div class="ds-result-eyebrow">Recommended chart</div>' +
+             '<div class="ds-result-name">' + escHTML(c.name) + '</div>' +
+           '</div>' +
+           '<p class="ds-result-why">' + c.why + '</p>' +
+           dsCodeBlock(c.code) +
+           '<div class="ds-section">' +
+             '<div class="ds-section-h">Watch out for</div>' +
+             '<ul>' + pitfalls + '</ul>' +
+           '</div>' +
+           dsDocsLink(c.docs) +
+         '</section>';
+}
+
+function dsRenderModel(dec) {
+  var p = DS_MODELS[dec.primary];
+  if (!p) return '<p>No model found.</p>';
+  var watch = p.watchout.map(function(x){return '<li>'+x+'</li>';}).join('');
+  var runner = '';
+  if (dec.runner) {
+    var r = DS_MODELS[dec.runner];
+    if (r) {
+      runner = '<div class="ds-runner">' +
+                 '<div class="ds-runner-head">Runner-up to compare against</div>' +
+                 '<div><span class="ds-runner-name">' + escHTML(r.name) + '</span> — ' + r.why + '</div>' +
+               '</div>';
+    }
+  }
+  return '<section class="ds-result-card">' +
+           '<div class="ds-result-header">' +
+             '<div class="ds-result-eyebrow">First model to try</div>' +
+             '<div class="ds-result-name">' + escHTML(p.name) + '</div>' +
+             '<div class="ds-result-class">' + escHTML(p.sklearnClass) + '</div>' +
+           '</div>' +
+           '<p class="ds-result-why">' + p.why + '</p>' +
+           dsCodeBlock(p.code) +
+           '<div class="ds-section">' +
+             '<div class="ds-section-h">Watch out for</div>' +
+             '<ul>' + watch + '</ul>' +
+           '</div>' +
+           dsDocsLink(p.docs) +
+           runner +
+         '</section>';
+}
+
+function dsRenderMetric(dec) {
+  var m = DS_METRICS[dec.primary];
+  if (!m) return '<p>No metric found.</p>';
+  var also = '';
+  if (dec.also) {
+    var a = DS_METRICS[dec.also];
+    if (a) {
+      also = '<div class="ds-also"><strong>Always also look at:</strong> ' + escHTML(a.name) + ' — ' + a.why + '</div>';
+    }
+  }
+  return '<section class="ds-result-card">' +
+           '<div class="ds-result-header">' +
+             '<div class="ds-result-eyebrow">Recommended metric</div>' +
+             '<div class="ds-result-name">' + escHTML(m.name) + '</div>' +
+             '<div class="ds-result-class">' + escHTML(m.sklearnFn) + '</div>' +
+           '</div>' +
+           '<p class="ds-result-why">' + m.why + '</p>' +
+           '<div class="ds-section">' +
+             '<div class="ds-section-h">What "good" looks like</div>' +
+             '<p style="font-size: var(--fs-sm); line-height: var(--lh-base); color: var(--ink-2);">' + m.interpretation + '</p>' +
+           '</div>' +
+           dsCodeBlock(m.code) +
+           dsDocsLink(m.docs) +
+           also +
+         '</section>';
+}
+
+
+
 // ═══════════════════════════════════════════════════════════════
 // EVENT WIRING — addEventListener everywhere; delegation for generated HTML
 // ═══════════════════════════════════════════════════════════════
@@ -4052,6 +5485,52 @@ function bindAll() {
   // Click outside to close
   modalReport.addEventListener('click', function(e) {
     if (e.target === modalReport) closeReportModal();
+  });
+
+  // ──────────── Data Science (beta) ────────────
+  // Sub-flow chooser cards
+  document.querySelectorAll('.ds-card').forEach(function(card) {
+    card.addEventListener('click', function() { dsStartFlow(card.dataset.dsflow); });
+  });
+  // Back to chooser button
+  document.getElementById('ds-wiz-back-to-chooser').addEventListener('click', dsShowChooser);
+  // Reset / back from result
+  document.getElementById('ds-reset-btn').addEventListener('click', dsShowChooser);
+  document.getElementById('ds-back-to-wiz-btn').addEventListener('click', dsBackFromResult);
+  // Wizard option clicks + back (delegated)
+  document.getElementById('ds-wiz-body').addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-dsq], [data-dsaction]');
+    if (!btn) return;
+    if (btn.dataset.dsaction === 'back') { dsBack(); return; }
+    if (btn.dataset.dsq) dsAnswer(btn.dataset.dsq, btn.dataset.dsv);
+  });
+  // Code copy buttons (delegated since result is generated)
+  document.getElementById('ds-result-card').addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-dscopy]');
+    if (!btn) return;
+    e.preventDefault();
+    var text = btn.dataset.dscopy;
+    var label = btn.querySelector('.ds-code-copy-label');
+    function done() {
+      btn.classList.add('copied');
+      if (label) label.textContent = '✓ Copied';
+      setTimeout(function() {
+        btn.classList.remove('copied');
+        if (label) label.textContent = 'Copy';
+      }, 1800);
+      track('ds/copy/' + dsState.flow, 'DS code copied');
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(fallback);
+    } else { fallback(); }
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'absolute'; ta.style.left = '-9999px';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      done();
+    }
   });
 
   // ──────────── Help-extra modal (per-question walkthroughs) ────────────
